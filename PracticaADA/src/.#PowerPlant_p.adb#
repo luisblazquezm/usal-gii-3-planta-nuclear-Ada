@@ -11,7 +11,13 @@ package body PowerPlant_p is
       procedure setOperation(operation:in Integer) is
       begin
 
+         -- Manejador de eventos: Lanza el evento TimeoutEvent
+         --                       que ejecuta el procedimiento Timeout (de ahi el Timeout'Access)
+         --                       cada tiTimeout segundos (en este caso cada 3 segundos).
+         -- Este evento segun el enunciado es para controlar que cada uno de los reactores está
+         -- actuando correctamente
          Set_Handler(TimeoutEvent, tiTimeout, Timeout'Access);
+
          if (operation /= operation_mode) then
             operation_mode := operation;
 
@@ -29,6 +35,8 @@ package body PowerPlant_p is
             -- Simula que el actuador tarda 1 decima de segundo como máximo en actuar
             delay 0.1;
 
+            -- Creo que esto es el evento que sube la temperatura de uno de los reactores
+            -- 1 vez cada 2 segundos +150ºC. Pero no estoy seguro.
             tNextTime := Clock + tiEventPeriod;
             Set_Handler(OutputEvent, tNextTime, Timer'Access);
          end if;
@@ -41,7 +49,7 @@ package body PowerPlant_p is
       --                de los reactores 150 ºC.
       procedure Timer(event:in out Timing_Event) is
       begin
-         temperature := temperature + operation_mode;
+         temperature := temperature + operation_mode; -- Esto creo que está mal, sería temperature + 150
          tNextTime := Clock + tiEventPeriod;
          Set_Handler(OutputEvent, tiEventPeriod, Timer'Access);
       exception
