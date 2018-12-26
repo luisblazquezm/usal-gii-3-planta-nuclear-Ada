@@ -75,11 +75,11 @@ package body Reactor_p is
       -- Procedimiento: lanza un evento que tiene que ocurrir cuando salte el timeout del reactor.
       --                En esta practica cada reactor imprimirá un mensaje de alerta si no
       --                recibe un mensaje de alguna de las tareas que controla un reactor pasado 3 segundos
-      procedure Timeout(event:in out Timing_Event) is
+      procedure ReactorNotWorkingEventHandler(event:in out Timing_Event) is
       begin
-         Put_Line("Alarma: Monitorización energía");
-         Set_Handler(TimeoutEvent, tiTimeout, Timeout'Access);
-      end Timeout;
+         Put_Line("WARNING: Notification from reactor " & Integer'Image(id) & " not received.");
+         Set_Handler(TimeoutEvent, tiTimeout, ReactorNotWorkingEventHandler'Access);
+      end ReactorNotWorkingEventHandler;
 
 
    end Reactor_t;
