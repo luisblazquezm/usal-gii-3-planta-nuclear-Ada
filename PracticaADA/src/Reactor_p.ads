@@ -23,6 +23,7 @@ package Reactor_p is
       procedure setID(newID:in Integer);
 
       function getTemperature return Temperature_t;
+      function getID return Integer;
 
    private
 

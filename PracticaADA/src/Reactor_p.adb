@@ -63,6 +63,11 @@ package body Reactor_p is
          return temperature;
       end getTemperature;
 
+      -- Funcion: devuelve el ID del reactor
+      function getID return Integer is
+      begin
+         return id;
+      end getID;
 
       -- Procedimiento: se establece el identificador de cada reactor
       --       [newID]: numero que se quiere establecer como nuevo ID del reactor
@@ -70,7 +75,6 @@ package body Reactor_p is
       begin
         id := newID;
       end;
-
 
       -- Procedimiento: lanza un evento que tiene que ocurrir cuando salte el timeout del reactor.
       --                En esta practica cada reactor imprimirá un mensaje de alerta si no

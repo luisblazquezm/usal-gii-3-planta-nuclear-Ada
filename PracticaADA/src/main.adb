@@ -32,9 +32,9 @@ procedure Main is
                -- Do nothing
                null;
             end ReactorIsAlive;
-         or delay 3.0;
+         or delay 3.0; -- 3 seconds delay
             -- Timeout actions
-            Put_Line("Reactor " & Integer'Image(reactor1.getID) & " - No hace nada.");
+            Put_Line("WARNING: notification from reactor " & Integer'Image(reactorID) & " not received. Possible.");
          end select;
       end loop;
    end CoordinatorTask;
