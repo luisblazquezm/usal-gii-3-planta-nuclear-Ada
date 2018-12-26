@@ -8,15 +8,16 @@ use Ada.Text_IO;
 
 with Ada.Calendar.Formatting;
 
-package PowerPlant_p is
+package Reactor_p is
 
    -- Rango de valores que podrá tomar los reactores (entre 0 y 2000)
    -- Aunque ninguno puede superar los 1750ºC
+   -- A lo mejor se podria variar el rango.
    subtype Temperature_t is Integer range 0..2000;
 
-   protected type PowerPlant_t is
+   protected type Reactor_t is
 
-      procedure setOperation(operation:in Integer);
+      procedure setOperationMode(operation:in Integer);
       procedure Timer(event:in out Timing_Event);
       procedure Timeout(event:in out Timing_Event);
       procedure setID(newID:in Integer);
@@ -25,15 +26,26 @@ package PowerPlant_p is
 
    private
 
+      -- Periodo de tiempo del evento (3 segundos)
       tiTimeout:Time_Span:=Milliseconds(3000);
       tNextTime:Time;
+
+      -- Temperatura inicial de cada reactor
       temperature:Temperature_t:=1450;
-      operation_mode:Integer:=0; -- Por defecto está a 0, que es no hacer NADA
+
+      -- Por defecto está a 0, que es no hacer NADA.
+      operation_mode:Integer:=0;
+
+      -- Periodo de tiempo del evento (1 segundo)
       tiEventPeriod:Time_Span:=Milliseconds(1000);
+
+      -- Eventos de Tiempo
       OutputEvent:Timing_Event;
       TimeoutEvent:Timing_Event;
+
+      -- Nº de id guardado de cada reactor
       id:Integer;
 
-   end PowerPlant_t;
+   end Reactor_t;
 
-end PowerPlant_p;
+end Reactor_p;
