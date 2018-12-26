@@ -21,24 +21,28 @@ procedure Main is
    reactor3: aliased Reactor_t;
 
    -- Tarea coordinadora, que comprueba que el reactor funciona
-   task CoordinatorTask is
-      entry ReactorIsAlive(id: Integer);
+   task type CoordinatorTask(reactorID: Integer) is
+      entry ReactorIsAlive;
    end CoordinatorTask;
-   task body CoordinatorTask
-
+   task body CoordinatorTask is
    begin
       loop
          select
-            accept ReactorIsAlive  do
+            accept ReactorIsAlive do
                -- Do nothing
                null;
             end ReactorIsAlive;
          or delay 3.0;
             -- Timeout actions
-
+            Put_Line("Reactor " & Integer'Image(reactor1.getID) & " - No hace nada.");
          end select;
       end loop;
    end CoordinatorTask;
+
+   -- Tareas coordinadoras
+   reactor1CoordinatorTask: CoordinatorTask(reactor1.getID);
+   reactor2CoordinatorTask: CoordinatorTask(reactor2.getID);
+   reactor3CoordinatorTask: CoordinatorTask(reactor3.getID);
 
    -- Tarea de variación de la temperatura en el reactor
    task type varyTemperatureTask;
