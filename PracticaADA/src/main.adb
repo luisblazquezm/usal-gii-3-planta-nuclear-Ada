@@ -20,6 +20,26 @@ procedure Main is
    reactor2: aliased Reactor_t;
    reactor3: aliased Reactor_t;
 
+   -- Tarea coordinadora, que comprueba que el reactor funciona
+   task CoordinatorTask is
+      entry ReactorIsAlive(id: Integer);
+   end CoordinatorTask;
+   task body CoordinatorTask
+
+   begin
+      loop
+         select
+            accept ReactorIsAlive  do
+               -- Do nothing
+               null;
+            end ReactorIsAlive;
+         or delay 3.0;
+            -- Timeout actions
+
+         end select;
+      end loop;
+   end CoordinatorTask;
+
    -- Tarea de variación de la temperatura en el reactor
    task type varyTemperatureTask;
    task body varyTemperatureTask is
@@ -74,7 +94,7 @@ procedure Main is
    task type tskMonitorConsumption;
    task body tskMonitorConsumption is
       tNextRelease: Time;
-      tiReleaseInterval:constant Time_Span:=Milliseconds(200);
+      tiReleaseInterval:constant Time_Span:=Milliseconds(2000);
 
       -- Temperatura de los 3 reactores
       temp1:Temperature_t;
