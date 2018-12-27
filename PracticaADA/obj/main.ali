@@ -1,179 +1,191 @@
-V "GNAT Lib v2011"
+V "GNAT Lib v2018"
 M P W=b
 A -gnatA
-P SS ZX
-R nnnnnnnnnvnnnnnnnnvnnvnvvvnnnnnnnvvnvnnvnnnnvnnnnvnvnnnnnnvnnvnnnnvnnnnnnnv1+nnnv1+nn
+A -mtune=generic
+A -march=x86-64
+P ZX
 
-U main%b		main.adb		fa446141 NE OO SU
+RN
+RV NO_DELAY
+RV NO_EXCEPTION_HANDLERS
+RV NO_EXCEPTIONS
+RV NO_FIXED_POINT
+RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
+RV NO_LOCAL_TIMING_EVENTS
+RV NO_LOCAL_PROTECTED_OBJECTS
+RV NO_SELECT_STATEMENTS
+RV NO_STANDARD_STORAGE_POOLS
+RV NO_TASK_HIERARCHY
+RV NO_TASKING
+RV NO_DEFAULT_INITIALIZATION
+RV NO_DYNAMIC_SIZED_OBJECTS
+RV NO_IMPLEMENTATION_PRAGMAS
+RV SPARK_05
+RV MAX_SELECT_ALTERNATIVES=2
+RV MAX_TASK_ENTRIES=1
+RV MAX_TASKS=1+
+RV MAX_ENTRY_QUEUE_LENGTH=1+
+
+U main%b		main.adb		e42aa8f1 NE OO SU
 W ada%s			ada.ads			ada.ali
-W ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
-W ada.exceptions%s	a-except.adb		a-except.ali
-W ada.finalization.heap_management%s  a-fihema.adb  a-fihema.ali
+Z ada.exceptions%s	a-except.adb		a-except.ali
 W ada.numerics%s	a-numeri.ads		a-numeri.ali
 W ada.numerics.discrete_random%s
 W ada.real_time%s	a-reatim.adb		a-reatim.ali
-W ada.real_time.delays%s  a-retide.adb		a-retide.ali
-W ada.tags%s		a-tags.adb		a-tags.ali
+Z ada.real_time.delays%s  a-retide.adb		a-retide.ali
+Z ada.tags%s		a-tags.adb		a-tags.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
-W powerplant_p%s	powerplant_p.adb	powerplant_p.ali
+Z interfaces%s		interfac.ads		interfac.ali
+W reactor_p%s		reactor_p.adb		reactor_p.ali
 W system%s		system.ads		system.ali
-W system.concat_4%s	s-conca4.adb		s-conca4.ali
-W system.img_int%s	s-imgint.adb		s-imgint.ali
-W system.parameters%s	s-parame.adb		s-parame.ali
-W system.pool_global%s	s-pooglo.adb		s-pooglo.ali
-W system.random_numbers%s  s-rannum.adb		s-rannum.ali
-W system.soft_links%s	s-soflin.adb		s-soflin.ali
-W system.standard_library%s  s-stalib.adb	s-stalib.ali
-W system.task_info%s	s-tasinf.adb		s-tasinf.ali
-W system.tasking%s	s-taskin.adb		s-taskin.ali
-W system.tasking.protected_objects%s  s-taprob.adb  s-taprob.ali
-W system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+Z system.concat_3%s	s-conca3.adb		s-conca3.ali
+Z system.img_int%s	s-imgint.adb		s-imgint.ali
+Z system.parameters%s	s-parame.adb		s-parame.ali
+Z system.random_numbers%s  s-rannum.adb		s-rannum.ali
+Z system.soft_links%s	s-soflin.adb		s-soflin.ali
+Z system.standard_library%s  s-stalib.adb	s-stalib.ali
+Z system.task_info%s	s-tasinf.adb		s-tasinf.ali
+Z system.tasking%s	s-taskin.adb		s-taskin.ali
+Z system.tasking.rendezvous%s  s-tasren.adb	s-tasren.ali
+Z system.tasking.stages%s  s-tassta.adb		s-tassta.ali
 
-D ada.ads		20110428140902 3ffc8e18
-D a-calend.ads		20110428140858 343c83dd
-D a-caldel.ads		20110428140858 9f20b83d
-D a-calfor.ads		20110428140858 0a6f9afc
-D a-catizo.ads		20110428140858 409d7e5b
-D a-except.ads		20110428140900 4759ecee
-D a-finali.ads		20110428140900 b333d305
-D a-fihema.ads		20110428140900 1940728a
-D a-ioexce.ads		20110428140900 8b9de6cd
-D a-numeri.ads		20110428140902 bb51c45a
-D a-nudira.ads		20110428140902 2fef2912
-D a-nudira.adb		20110428140902 e57ce22b
-D a-reatim.ads		20110428140902 63f07669
-D a-retide.ads		20110428140902 081cdaa4
-D a-rttiev.ads		20110428140902 22f35a33
-D a-stream.ads		20110428140902 2ca4ee37
-D a-tags.ads		20110428140902 7b33f560
-D a-textio.ads		20110428140902 386df5d4
-D a-unccon.ads		20110428140902 f9eb8f06
-D interfac.ads		20110428140906 f77d8799
-D i-c.ads		20110428140906 5421119b
-D i-cstrin.ads		20110428140906 341d0ddf
-D i-cstrea.ads		20110428140906 1bd72c32
-D main.adb		20140108223618 cd084651
-D powerplant_p.ads	20140106004924 433e8dbf
-D system.ads		20110428140910 bc164b96
-D s-atacco.ads		20110428140906 1dc856ad
-D s-conca4.ads		20110428140906 025fe3be
-D s-crtl.ads		20110428140906 ac77b159
-D s-exctab.ads		20110428140906 66e51330
-D s-ficobl.ads		20110428140906 443b9d66
-D s-finroo.ads		20110428140906 2dd85ce2
-D s-imgint.ads		20110428140906 02dbe0c2
-D s-imguns.ads		20110428140906 9ff43cf7
-D s-multip.ads		20110428140908 38ac9f73
-D s-osinte.ads		20110428140908 ecf1fbfd
-D s-parame.ads		20110428140908 03aa3b01
-D s-pooglo.ads		20110428140908 542f33d0
-D s-rannum.ads		20110428140908 5eb33f0a
-D s-rannum.adb		20110428140908 67756f39
-D s-secsta.ads		20110428140908 eea35a36
-D s-soflin.ads		20110428140908 607487c5
-D s-stache.ads		20110428140908 596fc1b4
-D s-stausa.ads		20110428140908 017a0a05
-D s-stalib.ads		20110428140908 f78bcf95
-D s-stoele.ads		20110428140908 facd7d98
-D s-stoele.adb		20110428140908 afc5dc80
-D s-stopoo.ads		20110428140908 5c51faf9
-D s-tasinf.ads		20110428140908 859198ad
-D s-taspri.ads		20110428140908 196697f7
-D s-taprop.ads		20110428140908 07f79e46
-D s-taskin.ads		20110428140908 b2eaee08
-D s-taprob.ads		20110428140908 502249e3
-D s-tassta.ads		20110428140908 e88ef99e
-D s-traent.ads		20110428140908 5221ee41
-D s-unstyp.ads		20110428140908 6ae15c76
-D s-valuns.ads		20110428140908 10a8ed3b
-D s-wchcon.ads		20110428140910 bfeb2e3d
-D s-win32.ads		20110428140910 07238fa2
+D ada.ads		20180524051736 76789da1 ada%s
+D a-calend.ads		20180524051738 372815c8 ada.calendar%s
+D a-calfor.ads		20180524051736 0a6f9afc ada.calendar.formatting%s
+D a-catizo.ads		20180524051738 409d7e5b ada.calendar.time_zones%s
+D a-except.ads		20180524051736 291912d5 ada.exceptions%s
+D a-finali.ads		20180524051738 bf4f806b ada.finalization%s
+D a-ioexce.ads		20180524051736 e4a01f64 ada.io_exceptions%s
+D a-numeri.ads		20180524051736 bb51c45a ada.numerics%s
+D a-nudira.ads		20180524051736 71e55def ada.numerics.discrete_random%s
+D a-nudira.adb		20180524051736 72908cdb ada.numerics.discrete_random%b
+D a-reatim.ads		20180524051738 0240fc73 ada.real_time%s
+D a-retide.ads		20180524051738 081cdaa4 ada.real_time.delays%s
+D a-rttiev.ads		20180524051738 22f35a33 ada.real_time.timing_events%s
+D a-stream.ads		20180524051736 119b8fb3 ada.streams%s
+D a-tags.ads		20180524051738 491b781d ada.tags%s
+D a-textio.ads		20180524051738 881db35a ada.text_io%s
+D a-unccon.ads		20180524051738 0e9b276f ada.unchecked_conversion%s
+D interfac.ads		20180524051736 5ab55268 interfaces%s
+D i-c.ads		20180524051736 5421119b interfaces.c%s
+D i-cstrin.ads		20180524051736 341d0ddf interfaces.c.strings%s
+D i-cstrea.ads		20180524051736 e53d8b8e interfaces.c_streams%s
+D main.adb		20181227180030 2271cacb main%b
+D reactor_p.ads		20181227173714 3de370fc reactor_p%s
+D system.ads		20180524051738 32a08138 system%s
+D s-atacco.ads		20180524051738 4c36d12f system.address_to_access_conversions%s
+D s-conca3.ads		20180524051738 0b705ca5 system.concat_3%s
+D s-crtl.ads		20180524051736 0ebbdb71 system.crtl%s
+D s-exctab.ads		20180524051738 54135002 system.exception_table%s
+D s-ficobl.ads		20180524051738 078245e4 system.file_control_block%s
+D s-finroo.ads		20180524051738 4ff27390 system.finalization_root%s
+D s-imgint.ads		20180524051736 02dbe0c2 system.img_int%s
+D s-imguns.ads		20180524051736 9ff43cf7 system.img_uns%s
+D s-memory.ads		20180524051736 597d6634 system.memory%s
+D s-multip.ads		20180524051736 38ac9f73 system.multiprocessors%s
+D s-osinte.ads		20180524051738 2e5b26a9 system.os_interface%s
+D s-parame.ads		20180524051738 48ec542b system.parameters%s
+D s-rannum.ads		20180524051736 99ade2f2 system.random_numbers%s
+D s-rannum.adb		20180524051738 20ba1217 system.random_numbers%b
+D s-ransee.ads		20180524051738 01a57b33 system.random_seed%s
+D s-secsta.ads		20180524051738 20bbe636 system.secondary_stack%s
+D s-soflin.ads		20180524051736 a7318a92 system.soft_links%s
+D s-stache.ads		20180524051738 a37c21ec system.stack_checking%s
+D s-stausa.ads		20180524051736 017a0a05 system.stack_usage%s
+D s-stalib.ads		20180524051738 09bd3940 system.standard_library%s
+D s-stalib.adb		20180524051736 f2fe2716 system.standard_library%b
+D s-stoele.ads		20180524051738 2dc34a04 system.storage_elements%s
+D s-tasinf.ads		20180524051738 601f6b72 system.task_info%s
+D s-taspri.ads		20180524051738 6c1d93d4 system.task_primitives%s
+D s-taprop.ads		20180524051738 1dd2e1b6 system.task_primitives.operations%s
+D s-taskin.ads		20180524051738 1d8c1ccb system.tasking%s
+D s-taprob.ads		20180524051738 acd6094d system.tasking.protected_objects%s
+D s-tpoben.ads		20180524051738 60ad3dae system.tasking.protected_objects.entries%s
+D s-tasren.ads		20180524051738 a67a9949 system.tasking.rendezvous%s
+D s-tassta.ads		20180524051738 cca55c94 system.tasking.stages%s
+D s-traent.ads		20180524051736 005bf670 system.traceback_entries%s
+D s-unstyp.ads		20180524051736 34867c83 system.unsigned_types%s
+D s-valuns.ads		20180524051738 10a8ed3b system.val_uns%s
+D s-wchcon.ads		20180524051738 1b7d22d2 system.wch_con%s
+D s-win32.ads		20180524051736 b7f96285 system.win32%s
 X 1 ada.ads
-16K9*Ada 19e8 24|2r6 3r6 5r5 6r5 10r6 16r23
-X 10 a-numeri.ads
-16K13*Numerics 32e17 24|10r10 16r27
-X 11 a-nudira.ads
-44k22*Discrete_Random 73e33 24|10w19 16r36
-48R9 Generator 24|32r19[16]
-50V13 Random{integer} 24|35s26[16]
-53U14 Reset<39|91p14> 24|34s14[16]
-X 12 a-nudira.adb
-51V16 Random[39|74]{integer} 40|394b13[24|16]
-X 13 a-reatim.ads
-39K13*Real_Time 139e18 24|2w10 5r9
-41O9*Time 24|57r21 103r21
-46O9*Time_Span 24|58r34 104r34
-53V13*Clock{41O9} 24|63s23 129s23
-55V13*"+"{41O9} 24|63s29 67s39 129s29 191s39
-85V13*Milliseconds{46O9} 24|58s45 104s45
-X 18 a-textio.ads
-49K13*Text_IO 471e16 24|3w10 6r9
-263U14*Put_Line 24|165s13 173s13 187s13
-X 20 interfac.ads
-57M9*Unsigned_32
-60M9*Unsigned_64
-X 24 main.adb
-13U11*Main 13b11 201l5 201t9
-15I12 ConsumptionVariance_t{integer} 16r52 31r19
-16K12 RNG[11|44] 32r15 34r10 35r22
-18I12 PowerConsumption_t{integer} 23r38 25r19 41r38 108r23
-19I12 PlantOutput_t{integer}
-21W19 City_t 26l8 26e14 28b19 46l8 46t14 48r9
-22U17 varyConsumption 30b17 39t10 65s15
-23V16 getConsumption{18I12} 41b16 44l11 44t25 134s34
-25i7 consumption{18I12} 36r10 36r25 43r17
-31i10 variance{15I12} 35m10 36r39
-32r10 seed{11|48R9[16]} 34r20 35r33
-48w4 city{21W19} 65r10 134r29
-50w4 plant1{25|15W19} 80r18 85r18 121m24 121r24 126r7 139m25 139r25 141m26
-. 141r26 148m25 148r25 150m26 150r26
-51w4 plant2{25|15W19} 122m25 122r25 127r7 142m25 142r25 145m22 145r22 154m20
-. 154r20
-52w4 plant3{25|15W19} 90r18 123m24 123r24 128r7 137m22 137r22 147m26 147r26
-. 153m21 153r21
-54T14 tskVaryPowerConsumption 55b14 70l8 70t31 72r19
-57o7 tNextRelease{13|41O9} 63m7 66r22 67m10 67r26
-58o7 tiReleaseInterval{13|46O9} 63r31 67r41
-72t4 PowerVariance{54T14}
-76U14 getTotalOutput 76b14 76<29 76<48 76<67 98l8 98t22 132s10
-76i29 out1{25|13I12} 80m10
-76i48 out2{25|13I12} 85m10
-76i67 out3{25|13I12} 90m10
-77T17 p1 78b17 81l11 81t13 93r14
-82T17 p2 83b17 86l11 86t13 94r14
-87T17 p3 88b17 91l11 91t13 95r14
-93t7 taskp1{77T17}
-94t7 taskp2{82T17}
-95t7 taskp3{87T17}
-101T14 tskMonitorConsumption 102b14 194l8 194t29 196r20
-103o7 tNextRelease{13|41O9} 129m7 190r22 191m10 191r26
-104o7 tiReleaseInterval{13|46O9} 129r31 191r41
-108i7 cityConsumption{18I12} 134m10 159r21 159r61 161r21 165r62 167r24 167r64
-. 169r30 173r66 187r55
-112i7 out1{25|13I12} 132m25 132r25 135r20 136r22 138r24 144r45 146r25 177r17
-113i7 out2{25|13I12} 132m31 132r31 135r27 136r44 138r17 144r17 144r38 152r25
-. 177r24 177r38
-114i7 out3{25|13I12} 132m37 132r37 135r34 136r14 136r36 144r24 146r17 152r17
-. 177r45
-116i7 output{integer} 135m10 159r46 161r37 165r108 167r49 169r21 173r112
-. 187r101
-117i7 diff{integer} 161m13 163r17 164r17 169m13 171r17 172r17
-119P12 plant_ptr(25|15W19) 121r13 122r14 123r13
-121p7 first{119P12} 137m13 145m13 164r33 164r61 170r13 178r16 182r16
-122p7 second{119P12} 141m16 147m16 150m16 153m13 163r33 163r62 171r33 171r63
-. 179r16 183r16
-123p7 third{119P12} 139m16 142m16 148m16 154m13 162r13 172r33 172r62 180r16
-. 184r16
-196t4 PowerMonitoring{101T14}
-X 25 powerplant_p.ads
-11K9*PowerPlant_p 24|1w6 9r5 25|37e17
-13I12*Output_t{integer} 24|76r38 76r57 76r76 112r12 113r12 114r12
-15W19*PowerPlant_t 24|50r20 51r20 52r20 119r36 25|35e20
-17U17 setOperation 24|162s19 163s40 163s69 164s39 164s67 170s19 171s40 171s70
-. 172s39 172s68 178s22 179s23 180s22 182s22 183s23 184s22
-20V16 getOutput{13I12} 24|80s25 85s25 90s25
-22U17 setID 24|126s14 127s14 128s14
-X 39 s-rannum.ads
-66V13*Random{20|57M9} 40|223i21
-67V13*Random{20|60M9} 40|223i21
+16K9*Ada 20e8 22|2r6 2r25 3r6 3r23 4r6 10r32
+X 8 a-numeri.ads
+16K13*Numerics 32e17 22|4r10 10r36
+X 9 a-nudira.ads
+44k22*Discrete_Random 75e33 22|4w19 10r45
+50R9 Generator<37|63R9> 22|124r47[10]
+52V13 Random{integer} 22|130s34[10]
+55U14 Reset<37|100p14> 22|129s20[10]
+X 10 a-nudira.adb
+53V16 Random[37|83]{integer} 38|392b13[22|10]
+X 11 a-reatim.ads
+39K13*Real_Time 185e18 22|2w10 2r29
+49O9*Time<duration> 22|57r21 125r21
+54O9*Time_Span<duration> 22|58r34 127r34
+61V13*Clock{49O9} 22|66s23 133s23
+65V14*"+"{49O9} 22|66s29 111s39 133s29 149s39
+119V13*Milliseconds{54O9} 22|58s45 127s47
+X 16 a-textio.ads
+49K13*Text_IO 471e16 22|3w10 3r27
+263U14*Put_Line 22|21s7 35s7 44s13 64s7 75s13 86s13 97s13 101s10
+X 18 interfac.ads
+74M9*Unsigned_32
+77M9*Unsigned_64
+X 22 main.adb
+6U11*Main 6b11 292l5 292t9
+9I12 ReactorCount_t{integer} 10r61 126r19
+10K12 RandomNumber[9|44] 124r34 129r7 130r21
+12w4 reactor1{23|14W19} 22r7 50r45 77r26 88r26 117r42 117r58 139r16 141r16
+. 143r16
+13w4 reactor2{23|14W19} 23r7 51r45 78r26 89r26 118r42 118r58
+14w4 reactor3{23|14W19} 24r7 52r45 79r26 90r26 119r42 119r58
+18T14 Inicializator 19b14 25l8 25t21 27r9
+27t4 ini{18T14}
+30T14 CoordinatorTask 30d30 32l8 32e23 33b14 47l8 47t23 50r29 51r29 52r29
+30i30 reactorID{integer} 44r76
+31Y13 ReactorIsAlive 38b20 41l17 41t31 104s47 105s47 106s47
+50t4 reactor1CoordinatorTask{30T14} 104r23
+51t4 reactor2CoordinatorTask{30T14} 105r23
+52t4 reactor3CoordinatorTask{30T14} 106r23
+55T14 ControllerTask 55d29 55d49 56b14 114l8 114t22 117r27 118r27 119r27
+55i29 reactorID{integer} 61r21
+55i49 reactorTemperature{23|12I12} 60r36
+57o7 tNextRelease{11|49O9} 66m7 110r22 111m10 111r26
+58o7 tiReleaseInterval{11|54O9} 66r31 111r41
+60i7 temperature{23|12I12} 72r14 72r43 84r17
+61i7 ID{integer} 76r18 87r18 101r58 103r15
+117t4 reactor1ControllerTask{55T14}
+118t4 reactor2ControllerTask{55T14}
+119t4 reactor3ControllerTask{55T14}
+122T14 varyTemperatureTask 123b14 152l8 152t27 155r21
+124r7 randomNumberGeneratorSeed{9|50R9[10]} 129r26 130r41
+125o7 tNextRelease{11|49O9} 133m7 148r22 149m10 149r26
+126i7 numReactor{9I12} 130m7 137r15
+127o7 tiReleaseInterval{11|54O9} 133r31 149r41
+155t4 varyTemperature{122T14}
+X 23 reactor_p.ads
+7K9*Reactor_p 22|1w6 1r21 23|48e14
+12I12*Temperature_t{integer} 22|55r69 60r19
+14W19*Reactor_t 22|12r21 13r21 14r21 23|46e17
+16U17 setOperationMode 22|77s35 78s35 79s35 88s35 89s35 90s35
+19U17 setID 22|22s16 23s16 24s16
+20U17 modifyTemperature 22|139s25 141s25 143s25
+22V16 getTemperature{12I12} 22|117s67 118s67 119s67
+23V16 getID{integer} 22|50s54 51s54 52s54 117s51 118s51 119s51
+X 24 system.ads
+67M9*Address
+X 33 s-memory.ads
+53V13*Alloc{24|67M9} 103i<c,__gnat_malloc>22
+68U14*Free 104i<c,__gnat_free>22
+76V13*Realloc{24|67M9} 105i<c,__gnat_realloc>22
+X 37 s-rannum.ads
+75V13*Random{18|74M9} 38|221i21
+76V13*Random{18|77M9} 38|221i21
+X 43 s-stausa.ads
+203U14*Initialize 204i<c,__gnat_stack_usage_initialize>22
+268U14*Output_Results 272i<c,__gnat_stack_usage_output_results>22
+X 45 s-stalib.adb
+93U14 Break_Start 94i<c,__gnat_break_start>22
 

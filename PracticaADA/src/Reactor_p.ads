@@ -1,11 +1,7 @@
-with Ada.Real_Time;
-with Ada.Real_Time.Timing_Events;
-with Ada.Text_IO;
-
-use Ada.Real_Time;
-use Ada.Real_Time.Timing_Events;
-use Ada.Text_IO;
-
+with System;
+with Ada.Real_Time; use Ada.Real_Time;
+with Ada.Real_Time.Timing_Events; use Ada.Real_Time.Timing_Events;
+with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Calendar.Formatting;
 
 package Reactor_p is
@@ -18,15 +14,15 @@ package Reactor_p is
    protected type Reactor_t is
 
       procedure setOperationMode(operation:in Integer);
-      procedure Timer(event:in out Timing_Event);
-      procedure Timeout(event:in out Timing_Event);
+      procedure ActuatorEventHandler(event:in out Timing_Event);
+      procedure ReactorNotWorkingEventHandler(event:in out Timing_Event);
       procedure setID(newID:in Integer);
+      procedure modifyTemperature(temp:in Integer);
 
       function getTemperature return Temperature_t;
       function getID return Integer;
 
    private
-
       -- Periodo de tiempo del evento (3 segundos)
       tiTimeout:Time_Span:=Milliseconds(3000);
       tNextTime:Time;

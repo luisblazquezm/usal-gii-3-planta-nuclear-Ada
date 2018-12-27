@@ -1,27 +1,30 @@
-with PowerPlant_p;
-with Ada.Real_Time;
-with Ada.Text_IO;
-
-use Ada.Real_Time;
-use Ada.Text_IO;
-
-
-use PowerPlant_p;
+with Reactor_p; use Reactor_p;
+with Ada.Real_Time; use Ada.Real_Time;
+with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Numerics.Discrete_Random;
-
 
 procedure Main is
 
    -- Numeros aleatorios
-   package RandomNumber is new Ada.Numerics.Discrete_Random(ConsumptionVariance_t);
+   subtype ReactorCount_t is Integer range 1..3;
+   package RandomNumber is new Ada.Numerics.Discrete_Random(ReactorCount_t);
 
-   reactor1: aliased Reactor_t;
-   reactor2: aliased Reactor_t;
-   reactor3: aliased Reactor_t;
+   reactor1:aliased Reactor_t;
+   reactor2:aliased Reactor_t;
+   reactor3:aliased Reactor_t;
 
-   reactor1.setID(1);
-   reactor2.setID(2);
-   reactor3.setID(3);
+   -- Para inicializar el numero de los reactores
+   -- PD: No, no se puede hacer fuera de una tarea porque da error, estariamos haciendo una acción y esta es la zona de declaraciones
+   task type Inicializator;
+   task body Inicializator is
+   begin
+      Put_Line("Inicializando");
+      reactor1.setID(1);
+      reactor2.setID(2);
+      reactor3.setID(3);
+   end Inicializator;
+
+   ini: Inicializator;
 
    -- Tarea coordinadora, que comprueba que el reactor funciona
    task type CoordinatorTask(reactorID: Integer) is
@@ -29,6 +32,7 @@ procedure Main is
    end CoordinatorTask;
    task body CoordinatorTask is
    begin
+      Put_Line("Hola 1");
       loop
          select
             accept ReactorIsAlive do
@@ -47,36 +51,100 @@ procedure Main is
    reactor2CoordinatorTask: CoordinatorTask(reactor2.getID);
    reactor3CoordinatorTask: CoordinatorTask(reactor3.getID);
 
-   task type ControllerTask(rID: Integer);
+   -- Tarea controladora, que actua en función de la temperatura del nucleo
+   task type ControllerTask(reactorID: Integer; reactorTemperature: Temperature_t); -- He probado a pasar la referencia de cada reactor con un access pero no me va -.-
    task body ControllerTask is
+      tNextRelease: Time;
+      tiReleaseInterval:constant Time_Span:=Milliseconds(2000);
+
+      temperature:Temperature_t := reactorTemperature;
+      ID:Integer := reactorID;
+
    begin
-      case rID is
-         when 1 =>
-            reactor1CoordinatorTask.ReactorIsAlive;
-         when 2 =>
-            reactor2CoordinatorTask.ReactorIsAlive;
-         when 3 =>
-            reactor3CoordinatorTask.ReactorIsAlive;
-         when others =>
-            null;
-      end case;
+      Put_Line("Hola 2");
+      -- Empezamos a contar los 2 segundos de muestreo
+      tNextRelease := Clock + tiReleaseInterval;
+
+      -- Filtramos los casos según la temperatura a la que se encuentre el nucleo
+      loop
+
+         -- CASO 1: temperatura es superior a (1500ºC)
+         if (temperature >= 1500 and then temperature <= 1750) then
+            -- Se abre una compuerta. Baja la temperratura 50 ºC
+            -- Compuerta se mantiene abierta mientras la temperatura sea superior a los 1500º
+            Put_Line("CASE 1: Temperature between 1500 and 1750");
+            case ID is
+               when 1 => reactor1.setOperationMode(1);
+               when 2 => reactor2.setOperationMode(1);
+               when 3 => reactor3.setOperationMode(1);
+               when others =>  null;
+            end case;
+
+         -- CASO 2: temperatura es superior a 1750ºC
+         elsif (temperature > 1750) then
+            -- Se mantiene la compuerta abierta
+            Put_Line("CASE 2: Temperature over 1750");
+            case ID is
+               when 1 => reactor1.setOperationMode(2);
+               when 2 => reactor2.setOperationMode(2);
+               when 3 => reactor3.setOperationMode(2);
+               when others =>null;
+            end case;
+
+         -- CASO 3: temperatura inferior a 1500ºC
+         else
+            -- No se hace nada
+            Put_Line("CASE 3: Nothing");
+            --null;
+         end if;
+
+         Put_Line("¿Estas vivo reactor " & Integer'Image(ID) & " ?");
+         -- Manda un mensaje al coordinador para indicar que está vivo cuando acaba de muestrear
+         case ID is
+            when 1 => reactor1CoordinatorTask.ReactorIsAlive;
+            when 2 => reactor2CoordinatorTask.ReactorIsAlive;
+            when 3 => reactor3CoordinatorTask.ReactorIsAlive;
+            when others => null;
+         end case;
+
+         delay until tNextRelease;
+         tNextRelease := tNextRelease + tiReleaseInterval;
+      end loop;
+
    end ControllerTask;
 
-   reactor1ControllerTask:ControllerTask(reactor1.getID);
-   reactor2ControllerTask:ControllerTask(reactor2.getID);
-   reactor3ControllerTask:ControllerTask(reactor3.getID);
+   -- Tareas controladoras
+   reactor1ControllerTask:ControllerTask(reactor1.getID, reactor1.getTemperature);
+   reactor2ControllerTask:ControllerTask(reactor2.getID, reactor2.getTemperature);
+   reactor3ControllerTask:ControllerTask(reactor3.getID, reactor3.getTemperature);
 
    -- Tarea de variación de la temperatura en el reactor
    task type varyTemperatureTask;
    task body varyTemperatureTask is
       randomNumberGeneratorSeed: RandomNumber.Generator;
       tNextRelease: Time;
-      tiReleaseInterval:constant Time_Span := Milliseconds(1000);
+      numReactor: ReactorCount_t;
+      tiReleaseInterval:constant Time_Span := Milliseconds(2000);
    begin
+      RandomNumber.Reset(randomNumberGeneratorSeed);
+      numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
 
+      -- Sube la temperatura cada 2 segundos
       tNextRelease := Clock + tiReleaseInterval;
+
       loop
          -- Seleccionar un reactor al azar, y subir su temperatura 150ºC
+         case numReactor is
+            when 1 =>
+               reactor1.modifyTemperature(150);
+            when 2 =>
+               reactor1.modifyTemperature(150);
+            when 3 =>
+               reactor1.modifyTemperature(150);
+            when others =>
+               null;
+         end case;
+
          delay until tNextRelease;
          tNextRelease := tNextRelease + tiReleaseInterval;
       end loop;
@@ -88,33 +156,33 @@ procedure Main is
 
    -- Procedimiento: recoge la temperatura total de los tres reactores
    --                en las variables out1, out2 y out3
-   procedure getTotalTemperature(temp1:out Temperature_t; temp2:out Temperature_t; temp3:out Temperature_t) is
-
-      task type p1;
-      task body p1 is
-      begin
-         temp1 := plant1.getOutput;
-      end p1;
-
-      task type p2;
-      task body p2 is
-      begin
-         temp2 := plant2.getOutput;
-      end p2;
-
-      task type p3;
-      task body p3 is
-      begin
-         temp3 := plant3.getOutput;
-      end p3;
-
-      taskp1:p1;
-      taskp2:p2;
-      taskp3:p3;
-
-   begin
-      null;
-   end getTotalTemperature;
+--     procedure getTotalTemperature(temp1:out Temperature_t; temp2:out Temperature_t; temp3:out Temperature_t) is
+--
+--        task type p1;
+--        task body p1 is
+--        begin
+--           temp1 := plant1.getOutput;
+--        end p1;
+--
+--        task type p2;
+--        task body p2 is
+--        begin
+--           temp2 := plant2.getOutput;
+--        end p2;
+--
+--        task type p3;
+--        task body p3 is
+--        begin
+--           temp3 := plant3.getOutput;
+--        end p3;
+--
+--        taskp1:p1;
+--        taskp2:p2;
+--        taskp3:p3;
+--
+--     begin
+--        null;
+--     end getTotalTemperature;
 
    -- Tarea Principal que realizará el monitor o tarea coordinadora cada 2 segundos
 --     task type ControllerTask;
