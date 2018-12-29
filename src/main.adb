@@ -78,10 +78,8 @@ procedure Main is
       --coordinator_access := new CoordinatorTask;
 
    begin
-      temperature := reactor_access.getTemperature;
-      reactorID := reactor_access.getID;
 
-      Put_Line("Let's see = " & Integer'Image(temperature) & " y reactor numero " & Integer'Image(reactorID));
+      reactorID := reactor_access.getID;
 
       -- TODO: justo al empezar mandar el mensaje Launch a la tarea coordinadora correspondiente -------------------------------------------------------------------------------------- TODO
       case reactorID is
@@ -96,6 +94,10 @@ procedure Main is
 
       -- Filtramos los casos según la temperatura a la que se encuentre el nucleo
       loop
+
+         temperature := reactor_access.getTemperature;
+
+         Put_Line("Let's see = " & Integer'Image(temperature) & " y reactor numero " & Integer'Image(reactorID));
 
          -- CASO 1: temperatura es superior a (1500ºC)
          if (temperature >= 1500 and then temperature <= 1750) then
@@ -156,12 +158,14 @@ procedure Main is
       tiReleaseInterval:constant Time_Span := Milliseconds(2000);
    begin
 
-      RandomNumber.Reset(randomNumberGeneratorSeed);
-      numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
+
+
       -- Sube la temperatura cada 2 segundos
       tNextRelease := Clock + tiReleaseInterval;
 
       loop
+         RandomNumber.Reset(randomNumberGeneratorSeed);
+         numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
          -- Seleccionar un reactor al azar, y subir su temperatura 150ºC
          case numReactor is
             when 1 =>

@@ -57,8 +57,8 @@ package body Reactor_Package is
          Put_Line("Reactor " & Integer'Image(id) & " Temperature : " & Integer'Image(temperature));
          Put_Line(" ");
 
-         --tNextTime := Clock + tiEventPeriod;
-         --Set_Handler(OutputEvent, tiEventPeriod, ActuatorEventHandler'Access);
+         tNextTime := Clock + tiEventPeriod;
+         Set_Handler(OutputEvent, tiEventPeriod, ActuatorEventHandler'Access);
       exception
             when Constraint_Error => null;
       end ActuatorEventHandler;
