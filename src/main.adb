@@ -5,9 +5,7 @@ with Ada.Numerics.Discrete_Random;
 with Ada.Real_Time.Timing_Events; use Ada.Real_Time.Timing_Events;
 with Ada.Calendar.Formatting;
 
-with Reactor_Package; use Reactor_Package; -- El tipo protegido Reactor no es visible por alguna razón  ------------------------------------------------------------------------ TODO
-                                           -- ni siquiera si lo creas dentro de este fichero
-                                           -- WHAT THE FUCK
+with Reactor_Package; use Reactor_Package;
 
 procedure Main is
 
@@ -67,7 +65,7 @@ procedure Main is
    reactor3CoordinatorTask: CoordinatorTask(reactor3.getID);
 
    -- Tarea controladora, que actua en función de la temperatura del nucleo
-   task type ControllerTask(reactor_access:access Reactor); -- Aqui hay que conseguir pasar estas referencias y modificar el contenido TODO
+   task type ControllerTask(reactor_access:access Reactor);
    task body ControllerTask is
 
       tNextRelease: Time;
@@ -81,7 +79,6 @@ procedure Main is
 
       reactorID := reactor_access.getID;
 
-      -- TODO: justo al empezar mandar el mensaje Launch a la tarea coordinadora correspondiente -------------------------------------------------------------------------------------- TODO
       case reactorID is
          when 1 => reactor1CoordinatorTask.Launch;
          when 2 => reactor2CoordinatorTask.Launch;
@@ -158,14 +155,14 @@ procedure Main is
       tiReleaseInterval:constant Time_Span := Milliseconds(2000);
    begin
 
-
+      RandomNumber.Reset(randomNumberGeneratorSeed);
 
       -- Sube la temperatura cada 2 segundos
       tNextRelease := Clock + tiReleaseInterval;
 
       loop
-         RandomNumber.Reset(randomNumberGeneratorSeed);
          numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
+
          -- Seleccionar un reactor al azar, y subir su temperatura 150ºC
          case numReactor is
             when 1 =>

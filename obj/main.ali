@@ -28,7 +28,7 @@ RV MAX_TASK_ENTRIES=2
 RV MAX_TASKS=1+
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U main%b		main.adb		c68b51ea NE OO SU
+U main%b		main.adb		7e313eab NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 W ada.calendar.formatting%s  a-calfor.adb	a-calfor.ali
@@ -76,7 +76,7 @@ D interfac.ads		20180524051736 5ab55268 interfaces%s
 D i-c.ads		20180524051736 5421119b interfaces.c%s
 D i-cstrin.ads		20180524051736 341d0ddf interfaces.c.strings%s
 D i-cstrea.ads		20180524051736 e53d8b8e interfaces.c_streams%s
-D main.adb		20181229182610 b92eec6a main%b
+D main.adb		20181229183124 0194832b main%b
 D reactor_package.ads	20181229181838 9e21eeb1 reactor_package%s
 D system.ads		20180524051738 32a08138 system%s
 D s-atacco.ads		20180524051738 4c36d12f system.address_to_access_conversions%s
@@ -126,8 +126,8 @@ X 8 a-numeri.ads
 X 9 a-nudira.ads
 44k22*Discrete_Random 75e33 22|4w19 16r45
 50R9 Generator<38|63R9> 22|155r47[16]
-52V13 Random{integer} 22|168s37[16]
-55U14 Reset<38|100p14> 22|167s23[16]
+52V13 Random{integer} 22|167s37[16]
+55U14 Reset<38|100p14> 22|161s20[16]
 X 10 a-nudira.adb
 53V16 Random[38|83]{integer} 39|392b13[22|16]
 X 11 a-reatim.ads
@@ -135,7 +135,7 @@ X 11 a-reatim.ads
 49O9*Time<duration> 22|73r21 156r21
 54O9*Time_Span<duration> 22|74r34 158r34
 61V13*Clock{49O9} 22|93s23 164s23
-65V14*"+"{49O9} 22|93s29 142s39 164s29 182s39
+65V14*"+"{49O9} 22|93s29 142s39 164s29 181s39
 119V13*Milliseconds{54O9} 22|74s45 158s47
 X 13 a-rttiev.ads
 38K23*Timing_Events 81e32 22|5w20 5r53
@@ -146,11 +146,11 @@ X 18 interfac.ads
 74M9*Unsigned_32
 77M9*Unsigned_64
 X 22 main.adb
-12U11*Main 12b11 193l5 193t9
+12U11*Main 12b11 192l5 192t9
 15I12 ReactorCount_t{integer} 16r61 157r19
-16K12 RandomNumber[9|44] 155r34 167r10 168r24
-19w4 reactor1{23|13W19} 31r7 65r45 108r26 119r26 148m42 148r42 172r16 174r16
-. 176r16
+16K12 RandomNumber[9|44] 155r34 161r7 167r24
+19w4 reactor1{23|13W19} 31r7 65r45 108r26 119r26 148m42 148r42 171r16 173r16
+. 175r16
 20w4 reactor2{23|13W19} 32r7 66r45 109r26 120r26 149m42 149r42
 21w4 reactor3{23|13W19} 33r7 67r45 110r26 121r26 150m42 150r42
 26T14 InitTask 27b14 34l8 34t16 36r10
@@ -171,19 +171,19 @@ X 22 main.adb
 148t4 reactor1ControllerTask{70T14}
 149t4 reactor2ControllerTask{70T14}
 150t4 reactor3ControllerTask{70T14}
-153T14 varyTemperatureTask 154b14 185l8 185t27 188r21
-155r7 randomNumberGeneratorSeed{9|50R9[16]} 167r29 168r44
-156o7 tNextRelease{11|49O9} 164m7 181r22 182m10 182r26
-157i7 numReactor{15I12} 168m10 170r15
-158o7 tiReleaseInterval{11|54O9} 164r31 182r41
-188t4 varyTemperature{153T14}
+153T14 varyTemperatureTask 154b14 184l8 184t27 187r21
+155r7 randomNumberGeneratorSeed{9|50R9[16]} 161r26 167r44
+156o7 tNextRelease{11|49O9} 164m7 180r22 181m10 181r26
+157i7 numReactor{15I12} 167m10 169r15
+158o7 tiReleaseInterval{11|54O9} 164r31 181r41
+187t4 varyTemperature{153T14}
 X 23 reactor_package.ads
 7K9*Reactor_Package 22|8w6 8r27 23|45e20
 11I12*Temperature_t{integer} 22|75r20
 13W19*Reactor 22|19r22 20r22 21r22 70r51 23|43e15
 15U17 setOperationMode 22|108s35 109s35 110s35 119s35 120s35 121s35
 17U17 setID 22|31s16 32s16 33s16
-18U17 modifyTemperature 22|172s25 174s25 176s25
+18U17 modifyTemperature 22|171s25 173s25 175s25
 20V16 getTemperature{11I12} 22|98s40
 21V16 getID{integer} 22|65s54 66s54 67s54 82s35
 X 24 system.ads
