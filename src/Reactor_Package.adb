@@ -16,7 +16,7 @@ package body Reactor_Package is
          --                       cada tiTimeout segundos (en este caso cada 3 segundos).
          -- Este evento segun el enunciado es para controlar que cada uno de los reactores está
          -- actuando correctamente
-         Set_Handler(TimeoutEvent, tiTimeout, ReactorNotWorkingEventHandler'Access);
+         --Set_Handler(TimeoutEvent, tiTimeout, ReactorNotWorkingEventHandler'Access);
 
          if (operation /= operation_mode) then
             operation_mode := operation;
@@ -41,12 +41,11 @@ package body Reactor_Package is
             end case;
 
             -- Simula que el actuador tarda 1 decima de segundo como máximo en actuar
-            delay 0.1;
+            --delay 0.1;
 
          end if;
 
       end setOperationMode;
-
 
       -- Procedimiento: tarea temporal que incrementa la temperatura cuando se produce un evento
       --                En nuestra practica, 1 vez cada 2 segundos sube la temperatura de uno

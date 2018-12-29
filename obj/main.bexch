@@ -1,0 +1,23 @@
+[GENERATED OBJECT FILE]
+b__main.o
+[PROJECT FILES]
+C:\Users\Luis\Documents\GitHub\Planta-Nuclear-Ada\nuclearplant.gpr
+20181229172320
+[BOUND OBJECT FILES]
+C:\Users\Luis\Documents\GitHub\Planta-Nuclear-Ada\obj\Reactor_Package.o
+C:\Users\Luis\Documents\GitHub\Planta-Nuclear-Ada\obj\main.o
+[GENERATED SOURCE FILES]
+b__main.ads
+b__main.adb
+b__main.ali
+[RESULTING OPTIONS]
+-LC:\Users\Luis\Documents\GitHub\Planta-Nuclear-Ada\obj\
+-LC:\Users\Luis\Documents\GitHub\Planta-Nuclear-Ada\obj\
+-LF:/gnat/2018/lib/gcc/x86_64-pc-mingw32/7.3.1/adalib/
+-static
+-static-libgcc
+F:/gnat/2018/lib/gcc/x86_64-pc-mingw32/7.3.1/adalib/libgnarl.a
+F:/gnat/2018/lib/gcc/x86_64-pc-mingw32/7.3.1/adalib/libgnat.a
+-Xlinker
+--stack=0x200000,0x1000
+-mthreads

@@ -1,0 +1,3 @@
+nuclear_plant.adb:23:04: missing "begin" for procedure "Nuclear_Plant" at line 12
+nuclear_plant.adb:30:04: declarations must come before "begin"
+nuclear_plant.adb:189:01: "end;" expected for "begin" at line 186

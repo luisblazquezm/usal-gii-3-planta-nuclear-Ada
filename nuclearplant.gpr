@@ -1,5 +1,5 @@
 project Nuclearplant is
     for Source_Dirs use ("src");
     for Object_Dir use "obj";
-    for Main use ("nuclear_plant.adb");
+    for Main use ("main.adb");
 end Nuclearplant;

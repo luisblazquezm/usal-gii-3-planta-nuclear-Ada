@@ -9,7 +9,7 @@ with Reactor_Package; use Reactor_Package; -- El tipo protegido Reactor no es vi
                                            -- ni siquiera si lo creas dentro de este fichero
                                            -- WHAT THE FUCK
 
-procedure Nuclear_Plant is
+procedure Main is
 
    -- Numeros aleatorios
    subtype ReactorCount_t is Integer range 1..3;
@@ -27,6 +27,7 @@ procedure Nuclear_Plant is
    task body InitTask is
    begin
       Put_Line("Initializing...");
+
       reactor1.setID(1);
       reactor2.setID(2);
       reactor3.setID(3);
@@ -66,17 +67,29 @@ procedure Nuclear_Plant is
    reactor3CoordinatorTask: CoordinatorTask(reactor3.getID);
 
    -- Tarea controladora, que actua en función de la temperatura del nucleo
-   task type ControllerTask(reactor_access: access Reactor; coordinator_access: access CoordinatorTask); -- Aqui hay que conseguir pasar estas referencias y modificar el contenido TODO
+   task type ControllerTask(reactor_access:access Reactor); -- Aqui hay que conseguir pasar estas referencias y modificar el contenido TODO
    task body ControllerTask is
 
       tNextRelease: Time;
       tiReleaseInterval:constant Time_Span:=Milliseconds(2000);
+      temperature: Temperature_t;
+      reactorID: Integer := 0;
 
-      temperature: Temperature_t := reactor_access.
+      --coordinator_access := new CoordinatorTask;
 
    begin
+      temperature := reactor_access.getTemperature;
+      reactorID := reactor_access.getID;
+
+      Put_Line("Let's see = " & Integer'Image(temperature) & " y reactor numero " & Integer'Image(reactorID));
 
       -- TODO: justo al empezar mandar el mensaje Launch a la tarea coordinadora correspondiente -------------------------------------------------------------------------------------- TODO
+      case reactorID is
+         when 1 => reactor1CoordinatorTask.Launch;
+         when 2 => reactor2CoordinatorTask.Launch;
+         when 3 => reactor3CoordinatorTask.Launch;
+         when others =>null;
+      end case;
 
       -- Empezamos a contar los 2 segundos de muestreo
       tNextRelease := Clock + tiReleaseInterval;
@@ -89,7 +102,7 @@ procedure Nuclear_Plant is
             -- Se abre una compuerta. Baja la temperratura 50 ºC
             -- Compuerta se mantiene abierta mientras la temperatura sea superior a los 1500º
             Put_Line("WARNING: reactor " & Integer'Image(reactorID) & ": temperature over 1500ºC.");
-            case ID is
+            case reactorID is
                when 1 => reactor1.setOperationMode(1);
                when 2 => reactor2.setOperationMode(1);
                when 3 => reactor3.setOperationMode(1);
@@ -100,7 +113,7 @@ procedure Nuclear_Plant is
          elsif (temperature > 1750) then
             -- Se mantiene la compuerta abierta
             Put_Line("WARNING: reactor " & Integer'Image(reactorID) & ": temperature over 1750ºC.");
-            case ID is
+            case reactorID is
                when 1 => reactor1.setOperationMode(2);
                when 2 => reactor2.setOperationMode(2);
                when 3 => reactor3.setOperationMode(2);
@@ -116,7 +129,7 @@ procedure Nuclear_Plant is
 
          -- Put_Line("¿Estas vivo reactor " & Integer'Image(ID) & " ?");
          -- Manda un mensaje al coordinador para indicar que está vivo cuando acaba de muestrear
-         case ID is
+         case reactorID is
             when 1 => reactor1CoordinatorTask.ReactorIsAlive;
             when 2 => reactor2CoordinatorTask.ReactorIsAlive;
             when 3 => reactor3CoordinatorTask.ReactorIsAlive;
@@ -130,9 +143,9 @@ procedure Nuclear_Plant is
    end ControllerTask;
 
    -- Tareas controladoras
-   reactor1ControllerTask:ControllerTask(reactor1.getID, reactor1.getTemperature);
-   reactor2ControllerTask:ControllerTask(reactor2.getID, reactor2.getTemperature);
-   reactor3ControllerTask:ControllerTask(reactor3.getID, reactor3.getTemperature);
+   reactor1ControllerTask:ControllerTask(reactor1'Access);
+   reactor2ControllerTask:ControllerTask(reactor2'Access);
+   reactor3ControllerTask:ControllerTask(reactor3'Access);
 
    -- Tarea de variación de la temperatura en el reactor
    task type varyTemperatureTask;
@@ -145,7 +158,6 @@ procedure Nuclear_Plant is
 
       RandomNumber.Reset(randomNumberGeneratorSeed);
       numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
-
       -- Sube la temperatura cada 2 segundos
       tNextRelease := Clock + tiReleaseInterval;
 
@@ -171,7 +183,7 @@ procedure Nuclear_Plant is
    -- Objeto tarea de variación de la temperatura
    varyTemperature: varyTemperatureTask;
 
-   begin
-      -- También podríamos instanciar todas las tareas dentro del begin
+begin
+   -- También podríamos instanciar todas las tareas dentro del begin
    null;
-end Nuclear_Plant;
+end Main;
