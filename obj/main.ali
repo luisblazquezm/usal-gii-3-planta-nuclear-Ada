@@ -28,7 +28,7 @@ RV MAX_TASK_ENTRIES=2
 RV MAX_TASKS=1+
 RV MAX_ENTRY_QUEUE_LENGTH=1+
 
-U main%b		main.adb		9e132b55 NE OO SU
+U main%b		main.adb		c144a2c1 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 W ada.calendar.formatting%s  a-calfor.adb	a-calfor.ali
@@ -76,7 +76,7 @@ D interfac.ads		20180524051736 5ab55268 interfaces%s
 D i-c.ads		20180524051736 5421119b interfaces.c%s
 D i-cstrin.ads		20180524051736 341d0ddf interfaces.c.strings%s
 D i-cstrea.ads		20180524051736 e53d8b8e interfaces.c_streams%s
-D main.adb		20181229184914 e1b696d5 main%b
+D main.adb		20181229185814 bee11f41 main%b
 D reactor_package.ads	20181229181838 9e21eeb1 reactor_package%s
 D system.ads		20180524051738 32a08138 system%s
 D s-atacco.ads		20180524051738 4c36d12f system.address_to_access_conversions%s
@@ -150,9 +150,8 @@ X 22 main.adb
 13I12 ReactorCount_t{integer} 14r61 160r19
 14K12 RandomNumber[9|44] 158r34 164r7 170r24
 17w4 reactor1{23|13W19} 29r7 63r45 105r26 116r26 127r26 151m42 151r42 175r16
-. 177r16 179r16
-18w4 reactor2{23|13W19} 30r7 64r45 106r26 117r26 128r26 152m42 152r42
-19w4 reactor3{23|13W19} 31r7 65r45 107r26 118r26 129r26 153m42 153r42
+18w4 reactor2{23|13W19} 30r7 64r45 106r26 117r26 128r26 152m42 152r42 177r16
+19w4 reactor3{23|13W19} 31r7 65r45 107r26 118r26 129r26 153m42 153r42 179r16
 24T14 InitTask 25b14 32l8 32t16 34r10
 34t4 init{24T14}
 38T14 CoordinatorTask 38d30 41l8 41e23 42b14 60l8 60t23 63r29 64r29 65r29

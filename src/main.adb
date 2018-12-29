@@ -174,9 +174,9 @@ procedure Main is
             when 1 =>
                reactor1.modifyTemperature(150);
             when 2 =>
-               reactor1.modifyTemperature(150);
+               reactor2.modifyTemperature(150);
             when 3 =>
-               reactor1.modifyTemperature(150);
+               reactor3.modifyTemperature(150);
             when others =>
                null;
          end case;

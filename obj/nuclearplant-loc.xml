@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <Locations >
-  <Project>
-    <vfs_file>C:\Users\Luis\Documents\GitHub\Planta-Nuclear-Ada\nuclearplant.gpr</vfs_file>
+  <Project >
     <file_marker column=" 17" line=" 24" >
       <vfs_project />
       <vfs_file>F:\GNAT\2018\bin\src\main.adb</vfs_file>
