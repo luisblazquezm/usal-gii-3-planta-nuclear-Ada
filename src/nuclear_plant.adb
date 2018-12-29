@@ -1,26 +1,26 @@
-with Reactor_p;
-use Reactor_p;
-with Synchronization_Barrier_p;
-use Synchronization_Barrier_p;
-
 with Ada.Real_Time; use Ada.Real_Time;
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Numerics.Discrete_Random;
 
-procedure Main is
+with reactor_p;
+use reactor_p;
+with synchronization_barrier_p;
+use synchronization_barrier_p;
+
+procedure Nuclear_Plant is
 
    -- Numeros aleatorios
    subtype ReactorCount_t is Integer range 1..3;
    package RandomNumber is new Ada.Numerics.Discrete_Random(ReactorCount_t);
 
    -- Reactors
-   reactor1:aliased Reactor_t;
-   reactor2:aliased Reactor_t;
-   reactor3:aliased Reactor_t;
+   reactor1:aliased Reactor;
+   reactor2:aliased Reactor;
+   reactor3:aliased Reactor;
 
    -- To make all tasks begin at once
-   number_of_tasks: constant Integer := 7;
-   synchronization_barrier: Synchronization_Barrier(number_of_tasks); -- 7 = number of coordinated tasks
+   number_of_tasks: constant Integer := 7; -- Number of tasks that must start at the same time is 7
+   synchronization_barrier: Synchronization_Barrier(number_of_tasks);
 
    -- Para inicializar el numero de los reactores
    -- PD: No, no se puede hacer fuera de una tarea porque da error, estariamos haciendo una acción y esta es la zona de declaraciones
@@ -42,7 +42,8 @@ procedure Main is
    task body CoordinatorTask is
    begin
 
-      synchronization_barrier.
+      synchronization_barrier.using;
+      synchronization_barrier.wait;
 
       loop
          select
@@ -73,7 +74,8 @@ procedure Main is
 
    begin
 
-      synchronizationBarrier.Wait;
+      synchronization_barrier.using;
+      synchronization_barrier.wait;
 
       -- Empezamos a contar los 2 segundos de muestreo
       tNextRelease := Clock + tiReleaseInterval;
@@ -93,7 +95,7 @@ procedure Main is
                when others =>  null;
             end case;
 
-         -- CASO 2: temperatura es superior a 1750ºC
+            -- CASO 2: temperatura es superior a 1750ºC
          elsif (temperature > 1750) then
             -- Se mantiene la compuerta abierta
             Put_Line("WARNING: reactor " & Integer'Image(reactorID) & ": temperature over 1750ºC.");
@@ -104,7 +106,7 @@ procedure Main is
                when others =>null;
             end case;
 
-         -- CASO 3: temperatura inferior a 1500ºC
+            -- CASO 3: temperatura inferior a 1500ºC
          else
             -- No se hace nada
             Put_Line("Reactor " & Integer'Image(reactorID) & " is stable.");
@@ -138,9 +140,10 @@ procedure Main is
       tNextRelease: Time;
       numReactor: ReactorCount_t;
       tiReleaseInterval:constant Time_Span := Milliseconds(2000);
-begin
+   begin
 
-      synchronizationBarrier.Wait;
+      synchronization_barrier.using;
+      synchronization_barrier.wait;
 
       RandomNumber.Reset(randomNumberGeneratorSeed);
       numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
@@ -172,9 +175,4 @@ begin
 
 begin
    null;
-end Main;
-
-
-
-
-
+end Nuclear_Plant;

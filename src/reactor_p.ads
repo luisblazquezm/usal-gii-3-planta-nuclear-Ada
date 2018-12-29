@@ -4,14 +4,14 @@ with Ada.Real_Time.Timing_Events; use Ada.Real_Time.Timing_Events;
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Calendar.Formatting;
 
-package Reactor_p is
+package reactor_p is
 
    -- Rango de valores que podrá tomar los reactores (entre 0 y 2000)
    -- Aunque ninguno puede superar los 1750ºC
    -- A lo mejor se podria variar el rango.
    subtype Temperature_t is Integer range 0..2000;
 
-   protected type Reactor_t is
+   protected type Reactor is
 
       procedure setOperationMode(operation:in Integer);
       procedure ActuatorEventHandler(event:in out Timing_Event);
@@ -43,6 +43,6 @@ package Reactor_p is
       -- Nº de id guardado de cada reactor
       id:Integer;
 
-   end Reactor_t;
+   end Reactor;
 
-end Reactor_p;
+end reactor_p;

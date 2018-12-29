@@ -1,6 +1,6 @@
-package body Reactor_p is
+package body reactor_p is
 
-   protected body Reactor_t is
+   protected body Reactor is
 
       -- Procedimiento: realiza una operación sobre la temperatura del reactor
       --                dependiendo de la temperatura a la que se encuentre en ese momento.
@@ -100,6 +100,6 @@ package body Reactor_p is
       end ReactorNotWorkingEventHandler;
 
 
-   end Reactor_t;
+   end Reactor;
 
-end Reactor_p;
+end reactor_p;

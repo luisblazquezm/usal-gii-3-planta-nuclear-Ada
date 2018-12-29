@@ -1,4 +1,4 @@
-package Synchronization_Barrier_p is
+package synchronization_barrier_p is
 
    protected type Synchronization_Barrier(tasks: Integer) is
       entry wait;
@@ -8,4 +8,4 @@ package Synchronization_Barrier_p is
       number_of_tasks: Integer := tasks;
    end Synchronization_Barrier;
 
-end Synchronization_Barrier_p;
+end synchronization_barrier_p;

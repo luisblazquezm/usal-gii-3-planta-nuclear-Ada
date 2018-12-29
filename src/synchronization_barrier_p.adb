@@ -1,4 +1,4 @@
-package body Synchronization_Barrier_p is
+package body synchronization_barrier_p is
 
    protected body Synchronization_Barrier is
 
@@ -15,4 +15,4 @@ package body Synchronization_Barrier_p is
 
    end Synchronization_Barrier;
 
-end Synchronization_Barrier_p;
+end synchronization_barrier_p;
