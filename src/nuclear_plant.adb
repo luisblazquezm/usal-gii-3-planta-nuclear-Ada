@@ -1,11 +1,13 @@
+with System;
 with Ada.Real_Time; use Ada.Real_Time;
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Numerics.Discrete_Random;
+with Ada.Real_Time.Timing_Events; use Ada.Real_Time.Timing_Events;
+with Ada.Calendar.Formatting;
 
-with reactor_p;
-use reactor_p;
-with synchronization_barrier_p;
-use synchronization_barrier_p;
+with Reactor_Package; use Reactor_Package; -- El tipo protegido Reactor no es visible por alguna razón  ------------------------------------------------------------------------ TODO
+                                           -- ni siquiera si lo creas dentro de este fichero
+                                           -- WHAT THE FUCK
 
 procedure Nuclear_Plant is
 
@@ -14,36 +16,36 @@ procedure Nuclear_Plant is
    package RandomNumber is new Ada.Numerics.Discrete_Random(ReactorCount_t);
 
    -- Reactors
-   reactor1:aliased Reactor;
-   reactor2:aliased Reactor;
-   reactor3:aliased Reactor;
-
-   -- To make all tasks begin at once
-   number_of_tasks: constant Integer := 7; -- Number of tasks that must start at the same time is 7
-   synchronization_barrier: Synchronization_Barrier(number_of_tasks);
+   reactor1: aliased Reactor;
+   reactor2: aliased Reactor;
+   reactor3: aliased Reactor;
 
    -- Para inicializar el numero de los reactores
    -- PD: No, no se puede hacer fuera de una tarea porque da error, estariamos haciendo una acción y esta es la zona de declaraciones
-   task type Init;
-   task body Init is
+   -- PPD: Pero se podría hacer en el begin de Nuclear_Plant si creamos las tareas después \_('-')_/
+   task type InitTask;
+   task body InitTask is
    begin
       Put_Line("Initializing...");
       reactor1.setID(1);
       reactor2.setID(2);
       reactor3.setID(3);
-   end Init;
+   end InitTask;
 
-   init: Init;
+   init: InitTask;
 
    -- Tarea coordinadora, que comprueba que el reactor funciona
+   -- Por que cojones cada vez que abro el bloque del type en el IDE aparece aqui debajo 'entry ReactorIsAlive';
    task type CoordinatorTask(reactorID: Integer) is
       entry ReactorIsAlive;
+      entry Launch; -- Para que no empiece a ejecutarse antes de que su tarea de control exista
    end CoordinatorTask;
    task body CoordinatorTask is
    begin
-
-      synchronization_barrier.using;
-      synchronization_barrier.wait;
+      -- To wait for correspondent controller task
+      accept Launch  do
+         null;
+      end Launch;
 
       loop
          select
@@ -53,7 +55,7 @@ procedure Nuclear_Plant is
             end ReactorIsAlive;
          or delay 3.0; -- 3 seconds delay
             -- Timeout actions
-            Put_Line("WARNING: notification from reactor " & Integer'Image(reactorID) & " not received. Possible reactor malfunction.");
+            Put_Line("WARNING: notification from reactor" & Integer'Image(reactorID) & " not received. Possible reactor malfunction.");
          end select;
       end loop;
    end CoordinatorTask;
@@ -64,18 +66,17 @@ procedure Nuclear_Plant is
    reactor3CoordinatorTask: CoordinatorTask(reactor3.getID);
 
    -- Tarea controladora, que actua en función de la temperatura del nucleo
-   task type ControllerTask(reactorID: Integer; reactorTemperature: Temperature_t); -- He probado a pasar la referencia de cada reactor con un access pero no me va -.-
+   task type ControllerTask(reactor_access: access Reactor; coordinator_access: access CoordinatorTask); -- Aqui hay que conseguir pasar estas referencias y modificar el contenido TODO
    task body ControllerTask is
+
       tNextRelease: Time;
       tiReleaseInterval:constant Time_Span:=Milliseconds(2000);
 
-      temperature:Temperature_t := reactorTemperature;
-      ID:Integer := reactorID;
+      temperature: Temperature_t := reactor_access.
 
    begin
 
-      synchronization_barrier.using;
-      synchronization_barrier.wait;
+      -- TODO: justo al empezar mandar el mensaje Launch a la tarea coordinadora correspondiente -------------------------------------------------------------------------------------- TODO
 
       -- Empezamos a contar los 2 segundos de muestreo
       tNextRelease := Clock + tiReleaseInterval;
@@ -142,9 +143,6 @@ procedure Nuclear_Plant is
       tiReleaseInterval:constant Time_Span := Milliseconds(2000);
    begin
 
-      synchronization_barrier.using;
-      synchronization_barrier.wait;
-
       RandomNumber.Reset(randomNumberGeneratorSeed);
       numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
 
@@ -171,8 +169,9 @@ procedure Nuclear_Plant is
    end varyTemperatureTask;
 
    -- Objeto tarea de variación de la temperatura
-   varyTemperatureTask: varyTemperatureTask;
+   varyTemperature: varyTemperatureTask;
 
-begin
+   begin
+      -- También podríamos instanciar todas las tareas dentro del begin
    null;
 end Nuclear_Plant;

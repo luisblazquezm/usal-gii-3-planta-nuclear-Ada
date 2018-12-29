@@ -1,4 +1,4 @@
-package body reactor_p is
+package body Reactor_Package is
 
    protected body Reactor is
 
@@ -90,16 +90,6 @@ package body reactor_p is
         id := newID;
       end;
 
-      -- Procedimiento: lanza un evento que tiene que ocurrir cuando salte el timeout del reactor.
-      --                En esta practica cada reactor imprimirá un mensaje de alerta si no
-      --                recibe un mensaje de alguna de las tareas que controla un reactor pasado 3 segundos
-      procedure ReactorNotWorkingEventHandler(event:in out Timing_Event) is
-      begin
-         Put_Line("WARNING: Notification from reactor " & Integer'Image(id) & " not received.");
-         Set_Handler(TimeoutEvent, tiTimeout, ReactorNotWorkingEventHandler'Access);
-      end ReactorNotWorkingEventHandler;
-
-
    end Reactor;
 
-end reactor_p;
+end Reactor_Package;

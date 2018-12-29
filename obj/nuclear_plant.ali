@@ -1,0 +1,170 @@
+V "GNAT Lib v2011"
+M P W=b
+A -gnatA
+P SS ZX
+R vnnnnnnnnvnnnnnnnnvvnvnvnvvnvnnvnvvnvnnnnnvnvnnnnvnvnnnnnnvnnvnnnnvnv1nv2nv1nv1+nnnv1+nn
+
+U nuclear_plant%b	nuclear_plant.adb	f6951384 NE OO SU
+W ada%s			ada.ads			ada.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.discrete_random%s
+W ada.real_time%s	a-reatim.adb		a-reatim.ali
+W ada.real_time.delays%s  a-retide.adb		a-retide.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ada.text_io%s		a-textio.adb		a-textio.ali
+W interfaces%s		interfac.ads		interfac.ali
+W reactor_p%s		reactor_p.adb		reactor_p.ali
+W system%s		system.ads		system.ali
+W system.concat_3%s	s-conca3.adb		s-conca3.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.parameters%s	s-parame.adb		s-parame.ali
+W system.random_numbers%s  s-rannum.adb		s-rannum.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+W system.task_info%s	s-tasinf.adb		s-tasinf.ali
+W system.tasking%s	s-taskin.adb		s-taskin.ali
+W system.tasking.protected_objects%s  s-taprob.adb  s-taprob.ali
+W system.tasking.protected_objects.entries%s  s-tpoben.adb  s-tpoben.ali
+W system.tasking.protected_objects.operations%s  s-tpobop.adb  s-tpobop.ali
+W system.tasking.rendezvous%s  s-tasren.adb	s-tasren.ali
+W system.tasking.stages%s  s-tassta.adb		s-tassta.ali
+
+D ada.ads		20110428140902 3ffc8e18
+D a-calend.ads		20110428140858 343c83dd
+D a-calfor.ads		20110428140858 0a6f9afc
+D a-catizo.ads		20110428140858 409d7e5b
+D a-except.ads		20110428140900 4759ecee
+D a-finali.ads		20110428140900 b333d305
+D a-fihema.ads		20110428140900 1940728a
+D a-ioexce.ads		20110428140900 8b9de6cd
+D a-numeri.ads		20110428140902 bb51c45a
+D a-nudira.ads		20110428140902 2fef2912
+D a-nudira.adb		20110428140902 e57ce22b
+D a-reatim.ads		20110428140902 63f07669
+D a-retide.ads		20110428140902 081cdaa4
+D a-rttiev.ads		20110428140902 22f35a33
+D a-stream.ads		20110428140902 2ca4ee37
+D a-tags.ads		20110428140902 7b33f560
+D a-textio.ads		20110428140902 386df5d4
+D a-unccon.ads		20110428140902 f9eb8f06
+D interfac.ads		20110428140906 f77d8799
+D i-c.ads		20110428140906 5421119b
+D i-cstrin.ads		20110428140906 341d0ddf
+D i-cstrea.ads		20110428140906 1bd72c32
+D nuclear_plant.adb	20181229152636 ada60e37
+D reactor_p.ads		20181229125820 2f41b71c
+D system.ads		20110428140910 bc164b96
+D s-atacco.ads		20110428140906 1dc856ad
+D s-conca3.ads		20110428140906 762a026a
+D s-crtl.ads		20110428140906 ac77b159
+D s-exctab.ads		20110428140906 66e51330
+D s-ficobl.ads		20110428140906 443b9d66
+D s-finroo.ads		20110428140906 2dd85ce2
+D s-imgint.ads		20110428140906 02dbe0c2
+D s-imguns.ads		20110428140906 9ff43cf7
+D s-multip.ads		20110428140908 38ac9f73
+D s-osinte.ads		20110428140908 ecf1fbfd
+D s-parame.ads		20110428140908 03aa3b01
+D s-pooglo.ads		20110428140908 542f33d0
+D s-rannum.ads		20110428140908 5eb33f0a
+D s-rannum.adb		20110428140908 67756f39
+D s-secsta.ads		20110428140908 eea35a36
+D s-soflin.ads		20110428140908 607487c5
+D s-stache.ads		20110428140908 596fc1b4
+D s-stausa.ads		20110428140908 017a0a05
+D s-stalib.ads		20110428140908 f78bcf95
+D s-stoele.ads		20110428140908 facd7d98
+D s-stoele.adb		20110428140908 afc5dc80
+D s-stopoo.ads		20110428140908 5c51faf9
+D s-tasinf.ads		20110428140908 859198ad
+D s-taspri.ads		20110428140908 196697f7
+D s-taprop.ads		20110428140908 07f79e46
+D s-taskin.ads		20110428140908 b2eaee08
+D s-taprob.ads		20110428140908 502249e3
+D s-tpoben.ads		20110428140908 e8374469
+D s-tpobop.ads		20110428140908 5f548bb3
+D s-tasren.ads		20110428140908 86fa7427
+D s-tassta.ads		20110428140908 e88ef99e
+D s-traent.ads		20110428140908 5221ee41
+D s-unstyp.ads		20110428140908 6ae15c76
+D s-valuns.ads		20110428140908 10a8ed3b
+D s-wchcon.ads		20110428140910 bfeb2e3d
+D s-win32.ads		20110428140910 07238fa2
+X 1 ada.ads
+16K9*Ada 19e8 23|1r6 1r25 2r6 2r23 3r6 34r32
+X 9 a-numeri.ads
+16K13*Numerics 32e17 23|3r10 34r36
+X 10 a-nudira.ads
+44k22*Discrete_Random 73e33 23|3w19 34r45
+48R9 Generator 23|163r47[34]
+50V13 Random{integer} 23|175s34[34]
+53U14 Reset<38|91p14> 23|174s20[34]
+X 11 a-nudira.adb
+51V16 Random[38|74]{integer} 39|394b13[23|34]
+X 12 a-reatim.ads
+39K13*Real_Time 139e18 23|1w10 1r29
+41O9*Time 23|91r21 164r21
+46O9*Time_Span 23|92r34 166r34
+53V13*Clock{41O9} 23|105s23 178s23
+55V13*"+"{41O9} 23|105s29 150s39 178s29 194s39
+85V13*Milliseconds{46O9} 23|92s45 166s47
+X 17 a-textio.ads
+49K13*Text_IO 471e16 23|2w10 2r27
+263U14*Put_Line 23|50s7 68s7 78s13 102s7 114s13 125s13 136s13 172s7
+X 19 interfac.ads
+57M9*Unsigned_32
+60M9*Unsigned_64
+X 23 nuclear_plant.adb
+8U11*Nuclear_Plant 8b11 204l5 204t18
+10W19 Synchronization_Barrier 10d43 16l8 16e31 17b19 30l8 30t31 43r18
+10i43 tasks{integer} 15r35
+11Y13 wait 19b13 23l11 23t15 66s20 100s20 170s20
+12U17 using 25b17 28l11 28t16 65s20 99s20 169s20
+14i7 counter{integer} 20r14 22r10 27r10 27r21
+15i7 number_of_tasks{integer} 20r24
+33I12 ReactorCount_t{integer} 34r61 165r19
+34K12 RandomNumber[10|44] 163r34 174r7 175r21
+37w4 reactor1{24|14W19} 51r7 84r45 116r26 127r26 156r42 156r58 184r16 186r16
+. 188r16
+38w4 reactor2{24|14W19} 52r7 85r45 117r26 128r26 157r42 157r58
+39w4 reactor3{24|14W19} 53r7 86r45 118r26 129r26 158r42 158r58
+42i4 number_of_tasks{integer} 43r42
+43w4 sync_barrier{10W19} 65r7 66r7 99r7 100r7 169r7 170r7
+47T14 InitTask 48b14 54l8 54t16 56r10
+56t4 init{47T14}
+59T14 CoordinatorTask 59d30 61l8 61e23 62b14 81l8 81t23 84r29 85r29 86r29
+59i30 reactorID{integer} 78r75
+60Y13 ReactorIsAlive 72b20 75l17 75t31 143s47 144s47 145s47
+84t4 reactor1CoordinatorTask{59T14} 143r23
+85t4 reactor2CoordinatorTask{59T14} 144r23
+86t4 reactor3CoordinatorTask{59T14} 145r23
+89T14 ControllerTask 89d29 89d49 90b14 153l8 153t22 156r27 157r27 158r27
+89i29 reactorID{integer} 95r21 114r58 125r58 136r49
+89i49 reactorTemperature{24|12I12} 94r36
+91o7 tNextRelease{12|41O9} 105m7 149r22 150m10 150r26
+92o7 tiReleaseInterval{12|46O9} 105r31 150r41
+94i7 temperature{24|12I12} 111r14 111r43 123r17
+95i7 ID{integer} 115r18 126r18 142r15
+156t4 reactor1ControllerTask{89T14}
+157t4 reactor2ControllerTask{89T14}
+158t4 reactor3ControllerTask{89T14}
+161T14 varyTemperatureTask 162b14 197l8 197t27 200r21
+163r7 randomNumberGeneratorSeed{10|48R9[34]} 174r26 175r41
+164o7 tNextRelease{12|41O9} 178m7 193r22 194m10 194r26
+165i7 numReactor{33I12} 175m7 182r15
+166o7 tiReleaseInterval{12|46O9} 178r31 194r41
+200t4 varyTemperature{161T14}
+X 24 reactor_p.ads
+7K9*reactor_p 23|5w6 6r5 24|48e14
+12I12*Temperature_t{integer} 23|89r69 94r19
+14W19*Reactor 23|37r21 38r21 39r21 24|46e15
+16U17 setOperationMode 23|116s35 117s35 118s35 127s35 128s35 129s35
+19U17 setID 23|51s16 52s16 53s16
+20U17 modifyTemperature 23|184s25 186s25 188s25
+22V16 getTemperature{12I12} 23|156s67 157s67 158s67
+23V16 getID{integer} 23|84s54 85s54 86s54 156s51 157s51 158s51
+X 38 s-rannum.ads
+66V13*Random{19|57M9} 39|223i21
+67V13*Random{19|60M9} 39|223i21
+
