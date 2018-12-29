@@ -24,6 +24,7 @@ package body Reactor_Package is
             case operation_mode is
                when 0 =>
                   Put_Line("Reactor " & Integer'Image(id) & " - Nothing.");
+                  Set_Handler(OutputEvent, tiEventPeriod, null); -- Borra la manejadora para que no siga decrementando porque la volvemos a llamar recursivamente dentro del ActuatorEventHandler
                when 1 =>
                   Put_Line("Reactor " & Integer'Image(id) & " - Opening gate.");
 

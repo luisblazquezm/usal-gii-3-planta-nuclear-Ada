@@ -119,10 +119,16 @@ procedure Main is
                when others =>null;
             end case;
 
-            -- CASO 3: temperatura inferior a 1500ºC
+         -- CASO 3: temperatura inferior a 1500ºC
          else
             -- No se hace nada
             Put_Line("Reactor " & Integer'Image(reactorID) & " is stable.");
+            case reactorID is
+               when 1 => reactor1.setOperationMode(0);
+               when 2 => reactor2.setOperationMode(0);
+               when 3 => reactor3.setOperationMode(0);
+               when others =>null;
+            end case;
             --null;
          end if;
 
@@ -156,13 +162,13 @@ procedure Main is
    begin
 
       RandomNumber.Reset(randomNumberGeneratorSeed);
-
+      Put_Line("REACTOR VARIANDO");
       -- Sube la temperatura cada 2 segundos
       tNextRelease := Clock + tiReleaseInterval;
 
       loop
          numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
-
+         Put_Line("REACTOR " & Integer'Image(numReactor) & " VARIANDO");
          -- Seleccionar un reactor al azar, y subir su temperatura 150ºC
          case numReactor is
             when 1 =>
