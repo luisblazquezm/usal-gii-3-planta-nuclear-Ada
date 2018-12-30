@@ -37,12 +37,12 @@ package body Reactor_Package is
                when 0 =>
                   Put_Line("Reactor " & Integer'Image(id) & " - Everything working normally.");
                   CloseGate;
-               when 1 =>
-                  Put_Line("Reactor " & Integer'Image(id) & " - Opening gate temporarily.");
+               when 1 | 2 =>
+                  Put_Line("Reactor " & Integer'Image(id) & " - Opening gate.");
                   OpenGate;
-               when 2 =>
-                  Put_Line("Reactor " & Integer'Image(id) & " - Opening gate until cooled.");
-                  OpenGate;
+--                 when 2 =>
+--                    Put_Line("Reactor " & Integer'Image(id) & " - Opening gate.");
+--                    OpenGate;
                when others =>
                   null;
             end case;
@@ -60,6 +60,8 @@ package body Reactor_Package is
       -- Procedimiento: incrementa o disminuye la temperatura del reactor 'temp' grados.
       procedure modifyTemperature(temp:in Integer) is
       begin
+         -- DEBUG
+         Put_Line("Temperature " & Integer'Image(id) & " is " & Integer'Image(temperature));
          temperature := temperature + temp;
       end modifyTemperature;
 

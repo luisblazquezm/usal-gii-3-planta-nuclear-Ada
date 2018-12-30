@@ -3,15 +3,16 @@ A -gnatA
 P SS ZX
 R nnnnnnnvnvnnnnnnnnvvnvnnnvnnnnnnnnnnvnnnnnnnvnnnnnnnnnnnnnnnnvnnnnvnnnnnnnnnnnnnn
 
-U reactor_package%b	reactor_package.adb	3ab0b952 NE OO PK
+U reactor_package%b	reactor_package.adb	9bc0b1d5 NE OO PK
 W ada.tags%s		a-tags.adb		a-tags.ali
 W system%s		system.ads		system.ali
 W system.concat_3%s	s-conca3.adb		s-conca3.ali
+W system.concat_4%s	s-conca4.adb		s-conca4.ali
 W system.img_int%s	s-imgint.adb		s-imgint.ali
 W system.soft_links%s	s-soflin.adb		s-soflin.ali
 W system.tasking.protected_objects%s  s-taprob.adb  s-taprob.ali
 
-U reactor_package%s	reactor_package.ads	d04b0904 EE NE OO PK
+U reactor_package%s	reactor_package.ads	40b07172 EE NE OO PK
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 W ada.calendar.formatting%s  a-calfor.adb	a-calfor.ali
@@ -43,11 +44,12 @@ D interfac.ads		20110428140906 f77d8799
 D i-c.ads		20110428140906 5421119b
 D i-cstrin.ads		20110428140906 341d0ddf
 D i-cstrea.ads		20110428140906 1bd72c32
-D reactor_package.ads	20181230115732 1f5c01e0
-D reactor_package.adb	20181230115824 25ecb8b2
+D reactor_package.ads	20181230122642 8fa77996
+D reactor_package.adb	20181230123410 1467c843
 D system.ads		20110428140910 bc164b96
 D s-atacco.ads		20110428140906 1dc856ad
 D s-conca3.ads		20110428140906 762a026a
+D s-conca4.ads		20110428140906 025fe3be
 D s-crtl.ads		20110428140906 ac77b159
 D s-exctab.ads		20110428140906 66e51330
 D s-ficobl.ads		20110428140906 443b9d66
@@ -95,30 +97,30 @@ X 10 a-rttiev.ads
 45U14*Set_Handler 20|8s38 13s38 20s38
 X 13 a-textio.ads
 49K13*Text_IO 471e16 19|4w10 4r27
-263U14*Put_Line 20|38s19 41s19 44s19
+263U14*Put_Line 20|38s19 41s19 64s10
 X 19 reactor_package.ads
-7K9*Reactor_Package 48l5 48e20 20|1b14 82l5 82t20
+7K9*Reactor_Package 48l5 48e20 20|1b14 84l5 84t20
 12I12*Temperature_t{integer} 24r38 35r18 38r19 20|55r38
-14W19*Reactor 46l8 46e15 20|3b19 79l8 79t15
+14W19*Reactor 46l8 46e15 20|3b19 81l8 81t15
 16U17 setOperationMode 16>34 20|29b17 52l11 52t27
 16i34 operation{integer} 20|29b34 32r14 34r31
-17U17 setID 17>23 20|74b17 77t10
-17i23 newID{integer} 20|74b23 76r15
-18U17 modifyTemperature 18>35 20|61b17 64l11 64t28
-18i35 temp{integer} 20|61b35 63r39
-20U17 OpenGate 20|5b17 9l11 9t19 42s19 45s19
+17U17 setID 17>23 20|76b17 79t10
+17i23 newID{integer} 20|76b23 78r15
+18U17 modifyTemperature 18>35 20|61b17 66l11 66t28
+18i35 temp{integer} 20|61b35 65r39
+20U17 OpenGate 20|5b17 9l11 9t19 42s19
 21U17 GateTimer 21=27 20|8r96 16b17 20r96 21l11 21t20
 21r27 event{10|40R9} 20|16b27
 22U17 CloseGate 20|11b17 14l11 14t20 39s19
 24V16 getTemperature{12I12} 20|55b16 58l11 58t25
-25V16 getID{integer} 20|67b16 70l11 70t16
+25V16 getID{integer} 20|69b16 72l11 72t16
 30o7 openSluiceGate_Period{9|46O9} 20|7r45 19r45
 31r7 openSluiceGateEvent{10|40R9} 20|8r50 13r50 20r50
 32o7 OpenSluiceGate_NextTime{9|41O9} 20|7r10 8r71 13r71 19r10 20r71
 35i7 decrement{12I12} 20|18r39
-38i7 temperature{12I12} 20|18r10 18r25 57r17 63r10 63r25
+38i7 temperature{12I12} 20|18r10 18r25 57r17 64r79 65r10 65r25
 41i7 operation_mode{integer} 20|32r27 34r13 36r18
-44i7 id{integer} 20|38r55 41r55 44r55 69r17 76r9
+44i7 id{integer} 20|38r55 41r55 64r50 71r17 78r9
 X 21 system.ads
 37K9*System 19|1w6 21|196e11
 

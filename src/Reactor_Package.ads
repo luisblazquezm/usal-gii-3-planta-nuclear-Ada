@@ -9,7 +9,7 @@ package Reactor_Package is
    -- Rango de valores que podrá tomar los reactores (entre 0 y 2000)
    -- Aunque ninguno puede superar los 1750ºC
    -- A lo mejor se podria variar el rango.
-   subtype Temperature_t is Integer range 0..2000;
+   subtype Temperature_t is Integer;
 
    protected type Reactor is
 

@@ -65,7 +65,14 @@ procedure Main is
    reactor3CoordinatorTask: CoordinatorTask(reactor3.getID);
 
    -- Tarea controladora, que actua en función de la temperatura del nucleo
-   task type ControllerTask(reactor_access:access Reactor);
+   task type ControllerTask(reactor_access:access Reactor); ----------------------------------------------------------------------------------------- TODO
+                                                            -- La gracia está en pasar el reactor y el coordinador por referencia,
+                                                            -- para evitar hacer esas sentencias case-when (imagina que fueran 1200 reactores y no 3 xd)
+                                                            -- Así que falta por modificar eso y ver que sigue funcionando.
+   -- This entry can be added to execute terminate for some reactor and check
+   -- that the coordinator task works properly. Check below.
+--        entry isover; -- DEBUG
+--     end ControllerTask;
    task body ControllerTask is
 
       tNextRelease: Time;
@@ -105,6 +112,17 @@ procedure Main is
                when 1 => reactor1.setOperationMode(1);
                when 2 => reactor2.setOperationMode(1);
                when 3 => reactor3.setOperationMode(1);
+                  -- DEBUG
+                  -- This can be executed, so that controller task #3 dies
+                  -- and stops sending messages to coordinator task
+--                 when 3 =>
+--                    select
+--                       accept isover do
+--                          null;
+--                       end isover;
+--                    or
+--                       terminate;
+--                    end select;
                when others =>  null;
             end case;
 
@@ -162,13 +180,13 @@ procedure Main is
    begin
 
       RandomNumber.Reset(randomNumberGeneratorSeed);
-      Put_Line("REACTOR VARIANDO");
+      -- Put_Line("REACTOR VARIANDO");
       -- Sube la temperatura cada 2 segundos
       tNextRelease := Clock + tiReleaseInterval;
 
       loop
          numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
-         Put_Line("REACTOR " & Integer'Image(numReactor) & " VARIANDO");
+         -- Put_Line("REACTOR " & Integer'Image(numReactor) & " VARIANDO");
          -- Seleccionar un reactor al azar, y subir su temperatura 150ºC
          case numReactor is
             when 1 =>
