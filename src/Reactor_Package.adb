@@ -2,6 +2,24 @@ package body Reactor_Package is
 
    protected body Reactor is
 
+      procedure OpenGate is
+      begin
+         OpenSluiceGate_NextTime := Clock + openSluiceGate_Period;
+         Ada.Real_Time.Timing_Events.Set_Handler(openSluiceGateEvent, OpenSluiceGate_NextTime, GateTimer'Access);
+      end OpenGate;
+
+      procedure CloseGate is
+      begin
+         Ada.Real_Time.Timing_Events.Set_Handler(openSluiceGateEvent, OpenSluiceGate_NextTime, null);
+      end CloseGate;
+
+      procedure GateTimer(event: in out Ada.Real_Time.Timing_Events.Timing_Event) is
+      begin
+         temperature := temperature - decrement;
+         OpenSluiceGate_NextTime := Clock + openSluiceGate_Period;
+         Ada.Real_Time.Timing_Events.Set_Handler(openSluiceGateEvent, OpenSluiceGate_NextTime, GateTimer'Access);
+      end GateTimer;
+
       -- Procedimiento: realiza una operación sobre la temperatura del reactor
       --                dependiendo de la temperatura a la que se encuentre en ese momento.
       --                A distinguir:
@@ -11,59 +29,27 @@ package body Reactor_Package is
       procedure setOperationMode(operation:in Integer) is
       begin
 
-         -- Manejador de eventos: Lanza el evento TimeoutEvent
-         --                       que ejecuta el procedimiento Timeout (de ahi el Timeout'Access)
-         --                       cada tiTimeout segundos (en este caso cada 3 segundos).
-         -- Este evento segun el enunciado es para controlar que cada uno de los reactores está
-         -- actuando correctamente
-         --Set_Handler(TimeoutEvent, tiTimeout, ReactorNotWorkingEventHandler'Access);
-
          if (operation /= operation_mode) then
+
             operation_mode := operation;
 
             case operation_mode is
                when 0 =>
-                  Put_Line("Reactor " & Integer'Image(id) & " - Nothing.");
-                  Set_Handler(OutputEvent, tiEventPeriod, null); -- Borra la manejadora para que no siga decrementando porque la volvemos a llamar recursivamente dentro del ActuatorEventHandler
+                  Put_Line("Reactor " & Integer'Image(id) & " - Everything working normally.");
+                  CloseGate;
                when 1 =>
-                  Put_Line("Reactor " & Integer'Image(id) & " - Opening gate.");
-
-                  tNextTime := Clock + tiEventPeriod;
-                  Set_Handler(OutputEvent, tNextTime, ActuatorEventHandler'Access);
+                  Put_Line("Reactor " & Integer'Image(id) & " - Opening gate temporarily.");
+                  OpenGate;
                when 2 =>
-                  Put_Line("Reactor " & Integer'Image(id) & " - WARNING : MAXIMUM TEMPERATURE 1750ºC REACHED . Opening gate.");
-
-                  while temperature < 1500 loop
-                     tNextTime := Clock + tiEventPeriod;
-                     Set_Handler(OutputEvent, tNextTime, ActuatorEventHandler'Access);
-                  end loop;
+                  Put_Line("Reactor " & Integer'Image(id) & " - Opening gate until cooled.");
+                  OpenGate;
                when others =>
                   null;
             end case;
 
-            -- Simula que el actuador tarda 1 decima de segundo como máximo en actuar
-            --delay 0.1;
-
          end if;
 
       end setOperationMode;
-
-      -- Procedimiento: tarea temporal que incrementa la temperatura cuando se produce un evento
-      --                En nuestra practica, 1 vez cada 2 segundos sube la temperatura de uno
-      --                de los reactores 150 ºC.
-      procedure ActuatorEventHandler(event:in out Timing_Event) is
-      begin
-         temperature := temperature - 50;
-         Put_Line(" ");
-         Put_Line("Reactor " & Integer'Image(id) & " Temperature : " & Integer'Image(temperature));
-         Put_Line(" ");
-
-         tNextTime := Clock + tiEventPeriod;
-         Set_Handler(OutputEvent, tiEventPeriod, ActuatorEventHandler'Access);
-      exception
-            when Constraint_Error => null;
-      end ActuatorEventHandler;
-
 
       -- Funcion: devuelve la temperatura del reactor
       function getTemperature return Temperature_t is
@@ -91,5 +77,6 @@ package body Reactor_Package is
       end;
 
    end Reactor;
+
 
 end Reactor_Package;

@@ -94,7 +94,7 @@ procedure Main is
 
          temperature := reactor_access.getTemperature;
 
-         Put_Line("Let's see = " & Integer'Image(temperature) & " y reactor numero " & Integer'Image(reactorID));
+         -- Put_Line("Let's see = " & Integer'Image(temperature) & " y reactor numero " & Integer'Image(reactorID));
 
          -- CASO 1: temperatura es superior a (1500ºC)
          if (temperature >= 1500 and then temperature <= 1750) then
