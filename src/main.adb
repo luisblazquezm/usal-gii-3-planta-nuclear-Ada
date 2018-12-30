@@ -60,19 +60,18 @@ procedure Main is
    end CoordinatorTask;
 
    -- Tareas coordinadoras
-   reactor1CoordinatorTask: CoordinatorTask(reactor1.getID);
-   reactor2CoordinatorTask: CoordinatorTask(reactor2.getID);
-   reactor3CoordinatorTask: CoordinatorTask(reactor3.getID);
+   reactor1CoordinatorTask:aliased CoordinatorTask(reactor1.getID);
+   reactor2CoordinatorTask:aliased CoordinatorTask(reactor2.getID);
+   reactor3CoordinatorTask:aliased CoordinatorTask(reactor3.getID);
 
    -- Tarea controladora, que actua en función de la temperatura del nucleo
-   task type ControllerTask(reactor_access:access Reactor); ----------------------------------------------------------------------------------------- TODO
+   task type ControllerTask(reactor_access:access Reactor; coordinator_access:access CoordinatorTask); ----------------------------------------------------------------------------------------- TODO
                                                             -- La gracia está en pasar el reactor y el coordinador por referencia,
                                                             -- para evitar hacer esas sentencias case-when (imagina que fueran 1200 reactores y no 3 xd)
                                                             -- Así que falta por modificar eso y ver que sigue funcionando.
+
    -- This entry can be added to execute terminate for some reactor and check
    -- that the coordinator task works properly. Check below.
---        entry isover; -- DEBUG
---     end ControllerTask;
    task body ControllerTask is
 
       tNextRelease: Time;
@@ -86,12 +85,13 @@ procedure Main is
 
       reactorID := reactor_access.getID;
 
-      case reactorID is
-         when 1 => reactor1CoordinatorTask.Launch;
-         when 2 => reactor2CoordinatorTask.Launch;
-         when 3 => reactor3CoordinatorTask.Launch;
-         when others =>null;
-      end case;
+      coordinator_access.Launch;
+--        case reactorID is
+--           when 1 => reactor1CoordinatorTask.Launch;
+--           when 2 => reactor2CoordinatorTask.Launch;
+--           when 3 => reactor3CoordinatorTask.Launch;
+--           when others =>null;
+--        end case;
 
       -- Empezamos a contar los 2 segundos de muestreo
       tNextRelease := Clock + tiReleaseInterval;
@@ -101,63 +101,53 @@ procedure Main is
 
          temperature := reactor_access.getTemperature;
 
-         -- Put_Line("Let's see = " & Integer'Image(temperature) & " y reactor numero " & Integer'Image(reactorID));
-
          -- CASO 1: temperatura es superior a (1500ºC)
          if (temperature >= 1500 and then temperature <= 1750) then
             -- Se abre una compuerta. Baja la temperratura 50 ºC
             -- Compuerta se mantiene abierta mientras la temperatura sea superior a los 1500º
             Put_Line("WARNING: reactor " & Integer'Image(reactorID) & ": temperature over 1500ºC.");
-            case reactorID is
-               when 1 => reactor1.setOperationMode(1);
-               when 2 => reactor2.setOperationMode(1);
-               when 3 => reactor3.setOperationMode(1);
-                  -- DEBUG
-                  -- This can be executed, so that controller task #3 dies
-                  -- and stops sending messages to coordinator task
---                 when 3 =>
---                    select
---                       accept isover do
---                          null;
---                       end isover;
---                    or
---                       terminate;
---                    end select;
-               when others =>  null;
-            end case;
+            reactor_access.setOperationMode(1);
+--              case reactorID is
+--                 when 1 => reactor1.setOperationMode(1);
+--                 when 2 => reactor2.setOperationMode(1);
+--                 when 3 => reactor3.setOperationMode(1);
+--                 when others =>  null;
+--              end case;
 
             -- CASO 2: temperatura es superior a 1750ºC
          elsif (temperature > 1750) then
             -- Se mantiene la compuerta abierta
             Put_Line("WARNING: reactor " & Integer'Image(reactorID) & ": temperature over 1750ºC.");
-            case reactorID is
-               when 1 => reactor1.setOperationMode(2);
-               when 2 => reactor2.setOperationMode(2);
-               when 3 => reactor3.setOperationMode(2);
-               when others =>null;
-            end case;
+            reactor_access.setOperationMode(2);
+--              case reactorID is
+--                 when 1 => reactor1.setOperationMode(2);
+--                 when 2 => reactor2.setOperationMode(2);
+--                 when 3 => reactor3.setOperationMode(2);
+--                 when others =>null;
+--              end case;
 
          -- CASO 3: temperatura inferior a 1500ºC
          else
             -- No se hace nada
             Put_Line("Reactor " & Integer'Image(reactorID) & " is stable.");
-            case reactorID is
-               when 1 => reactor1.setOperationMode(0);
-               when 2 => reactor2.setOperationMode(0);
-               when 3 => reactor3.setOperationMode(0);
-               when others =>null;
-            end case;
+            reactor_access.setOperationMode(0);
+--              case reactorID is
+--                 when 1 => reactor1.setOperationMode(0);
+--                 when 2 => reactor2.setOperationMode(0);
+--                 when 3 => reactor3.setOperationMode(0);
+--                 when others =>null;
+--              end case;
             --null;
          end if;
 
-         -- Put_Line("¿Estas vivo reactor " & Integer'Image(ID) & " ?");
          -- Manda un mensaje al coordinador para indicar que está vivo cuando acaba de muestrear
-         case reactorID is
-            when 1 => reactor1CoordinatorTask.ReactorIsAlive;
-            when 2 => reactor2CoordinatorTask.ReactorIsAlive;
-            when 3 => reactor3CoordinatorTask.ReactorIsAlive;
-            when others => null;
-         end case;
+         coordinator_access.ReactorIsAlive;
+--           case reactorID is
+--              when 1 => reactor1CoordinatorTask.ReactorIsAlive;
+--              when 2 => reactor2CoordinatorTask.ReactorIsAlive;
+--              when 3 => reactor3CoordinatorTask.ReactorIsAlive;
+--              when others => null;
+--           end case;
 
          delay until tNextRelease;
          tNextRelease := tNextRelease + tiReleaseInterval;
@@ -166,9 +156,9 @@ procedure Main is
    end ControllerTask;
 
    -- Tareas controladoras
-   reactor1ControllerTask:ControllerTask(reactor1'Access);
-   reactor2ControllerTask:ControllerTask(reactor2'Access);
-   reactor3ControllerTask:ControllerTask(reactor3'Access);
+   reactor1ControllerTask:ControllerTask(reactor1'Access, reactor1CoordinatorTask'Access);
+   reactor2ControllerTask:ControllerTask(reactor2'Access, reactor2CoordinatorTask'Access);
+   reactor3ControllerTask:ControllerTask(reactor3'Access, reactor3CoordinatorTask'Access);
 
    -- Tarea de variación de la temperatura en el reactor
    task type varyTemperatureTask;
@@ -180,13 +170,11 @@ procedure Main is
    begin
 
       RandomNumber.Reset(randomNumberGeneratorSeed);
-      -- Put_Line("REACTOR VARIANDO");
       -- Sube la temperatura cada 2 segundos
       tNextRelease := Clock + tiReleaseInterval;
 
       loop
          numReactor := RandomNumber.Random(randomNumberGeneratorSeed);
-         -- Put_Line("REACTOR " & Integer'Image(numReactor) & " VARIANDO");
          -- Seleccionar un reactor al azar, y subir su temperatura 150ºC
          case numReactor is
             when 1 =>
