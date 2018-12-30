@@ -2,9 +2,9 @@ V "GNAT Lib v2011"
 M P W=b
 A -gnatA
 P SS ZX
-R nnnnnnnvnvnnnnnnnnvnnvnvnvvnvnnvnvnnnnnnnnvnvnnnnvnvvnnnnnvnnvnnnnvnnnv2nv2nv1+nnnv1+nn
+R nnnnnnnvnvnnnnnnnnvnnvnvnvvnvnnvnvnnnnnnnnvnvnnnnvnvnnnnnnvnnvnnnnvnnnv2nv2nv1+nnnv1+nn
 
-U main%b		main.adb		1199547f NE OO SU
+U main%b		main.adb		6cf45ca7 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar%s	a-calend.adb		a-calend.ali
 W ada.calendar.formatting%s  a-calfor.adb	a-calfor.ali
@@ -52,7 +52,7 @@ D interfac.ads		20110428140906 f77d8799
 D i-c.ads		20110428140906 5421119b
 D i-cstrin.ads		20110428140906 341d0ddf
 D i-cstrea.ads		20110428140906 1bd72c32
-D main.adb		20181230124948 7ec60c1f
+D main.adb		20181230125354 03ab04c7
 D reactor_package.ads	20181230122642 8fa77996
 D system.ads		20110428140910 bc164b96
 D s-atacco.ads		20110428140906 1dc856ad
@@ -100,68 +100,67 @@ X 9 a-numeri.ads
 16K13*Numerics 32e17 23|4r10 14r36
 X 10 a-nudira.ads
 44k22*Discrete_Random 73e33 23|4w19 14r45
-48R9 Generator 23|169r47[14]
-50V13 Random{integer} 23|181s37[14]
-53U14 Reset<38|91p14> 23|175s20[14]
+48R9 Generator 23|176r47[14]
+50V13 Random{integer} 23|188s37[14]
+53U14 Reset<38|91p14> 23|182s20[14]
 X 11 a-nudira.adb
 51V16 Random[38|74]{integer} 39|394b13[23|14]
 X 12 a-reatim.ads
 39K13*Real_Time 139e18 23|2w10 2r29 5r10 5r43
-41O9*Time 23|73r21 170r21
-46O9*Time_Span 23|74r34 172r34
-53V13*Clock{41O9} 23|92s23 178s23
-55V13*"+"{41O9} 23|92s29 156s39 178s29 196s39
-85V13*Milliseconds{46O9} 23|74s45 172s47
+41O9*Time 23|78r21 177r21
+46O9*Time_Span 23|79r34 179r34
+53V13*Clock{41O9} 23|97s23 185s23
+55V13*"+"{41O9} 23|97s29 163s39 185s29 203s39
+85V13*Milliseconds{46O9} 23|79s45 179s47
 X 14 a-rttiev.ads
 38K23*Timing_Events 81e32 23|5w20 5r53
 X 17 a-textio.ads
 49K13*Text_IO 471e16 23|3w10 3r27
-263U14*Put_Line 23|27s7 57s13 105s13 125s13 136s13
+263U14*Put_Line 23|27s7 57s13 110s13 132s13 143s13
 X 19 interfac.ads
 57M9*Unsigned_32
 60M9*Unsigned_64
 X 23 main.adb
-10U11*Main 10b11 207l5 207t9
-13I12 ReactorCount_t{integer} 14r61 171r19
-14K12 RandomNumber[10|44] 169r34 175r7 181r24
-17w4 reactor1{24|14W19} 29r7 63r45 107r26 127r26 138r26 162m42 162r42 186r16
-18w4 reactor2{24|14W19} 30r7 64r45 108r26 128r26 139r26 163m42 163r42 188r16
-19w4 reactor3{24|14W19} 31r7 65r45 129r26 140r26 164m42 164r42 190r16
+10U11*Main 10b11 214l5 214t9
+13I12 ReactorCount_t{integer} 14r61 178r19
+14K12 RandomNumber[10|44] 176r34 182r7 188r24
+17w4 reactor1{24|14W19} 29r7 63r45 112r26 134r26 145r26 169m42 169r42 193r16
+18w4 reactor2{24|14W19} 30r7 64r45 113r26 135r26 146r26 170m42 170r42 195r16
+19w4 reactor3{24|14W19} 31r7 65r45 114r26 136r26 147r26 171m42 171r42 197r16
 24T14 InitTask 25b14 32l8 32t16 34r10
 34t4 init{24T14}
 38T14 CoordinatorTask 38d30 41l8 41e23 42b14 60l8 60t23 63r29 64r29 65r29
 38i30 reactorID{integer} 57r75
-39Y13 ReactorIsAlive 51b20 54l17 54t31 149s47 150s47 151s47
-40Y13 Launch 45b14 47l11 47t17 85s44 86s44 87s44
-63t4 reactor1CoordinatorTask{38T14} 85r20 149r23
-64t4 reactor2CoordinatorTask{38T14} 86r20 150r23
-65t4 reactor3CoordinatorTask{38T14} 87r20 151r23
-68T14 ControllerTask 68d29 70l8 70e22 71b14 159l8 159t22 162r27 163r27 164r27
-69Y13 isover 113b29 115l26 115t32
-73o7 tNextRelease{12|41O9} 92m7 155r22 156m10 156r26
-74o7 tiReleaseInterval{12|46O9} 92r31 156r41
-75i7 temperature{24|12I12} 97m10 102r14 102r43 123r17
-76i7 reactorID{integer} 82m7 84r12 105r58 106r18 125r58 126r18 136r49 137r18
-. 148r15
-162t4 reactor1ControllerTask{68T14}
-163t4 reactor2ControllerTask{68T14}
-164t4 reactor3ControllerTask{68T14}
-167T14 varyTemperatureTask 168b14 199l8 199t27 202r21
-169r7 randomNumberGeneratorSeed{10|48R9[14]} 175r26 181r44
-170o7 tNextRelease{12|41O9} 178m7 195r22 196m10 196r26
-171i7 numReactor{13I12} 181m10 184r15
-172o7 tiReleaseInterval{12|46O9} 178r31 196r41
-202t4 varyTemperature{167T14}
+39Y13 ReactorIsAlive 51b20 54l17 54t31 156s47 157s47 158s47
+40Y13 Launch 45b14 47l11 47t17 90s44 91s44 92s44
+63t4 reactor1CoordinatorTask{38T14} 90r20 156r23
+64t4 reactor2CoordinatorTask{38T14} 91r20 157r23
+65t4 reactor3CoordinatorTask{38T14} 92r20 158r23
+68T14 ControllerTask 68d29 76b14 166l8 166t22 169r27 170r27 171r27
+78o7 tNextRelease{12|41O9} 97m7 162r22 163m10 163r26
+79o7 tiReleaseInterval{12|46O9} 97r31 163r41
+80i7 temperature{24|12I12} 102m10 107r14 107r43 130r17
+81i7 reactorID{integer} 87m7 89r12 110r58 111r18 132r58 133r18 143r49 144r18
+. 155r15
+169t4 reactor1ControllerTask{68T14}
+170t4 reactor2ControllerTask{68T14}
+171t4 reactor3ControllerTask{68T14}
+174T14 varyTemperatureTask 175b14 206l8 206t27 209r21
+176r7 randomNumberGeneratorSeed{10|48R9[14]} 182r26 188r44
+177o7 tNextRelease{12|41O9} 185m7 202r22 203m10 203r26
+178i7 numReactor{13I12} 188m10 191r15
+179o7 tiReleaseInterval{12|46O9} 185r31 203r41
+209t4 varyTemperature{174T14}
 X 24 reactor_package.ads
 7K9*Reactor_Package 23|8w6 8r27 24|48e20
-12I12*Temperature_t{integer} 23|75r20
+12I12*Temperature_t{integer} 23|80r20
 14W19*Reactor 23|17r22 18r22 19r22 68r51 24|46e15
-16U17 setOperationMode 23|107s35 108s35 127s35 128s35 129s35 138s35 139s35
-. 140s35
+16U17 setOperationMode 23|112s35 113s35 114s35 134s35 135s35 136s35 145s35
+. 146s35 147s35
 17U17 setID 23|29s16 30s16 31s16
-18U17 modifyTemperature 23|186s25 188s25 190s25
-24V16 getTemperature{12I12} 23|97s40
-25V16 getID{integer} 23|63s54 64s54 65s54 82s35
+18U17 modifyTemperature 23|193s25 195s25 197s25
+24V16 getTemperature{12I12} 23|102s40
+25V16 getID{integer} 23|63s54 64s54 65s54 87s35
 X 25 system.ads
 37K9*System 23|1w6 25|196e11
 X 38 s-rannum.ads
