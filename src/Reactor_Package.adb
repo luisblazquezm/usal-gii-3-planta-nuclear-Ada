@@ -35,14 +35,14 @@ package body Reactor_Package is
 
             case operation_mode is
                when 0 =>
-                  Put_Line("Reactor " & Integer'Image(id) & " - Everything working normally.");
+                  -- Put_Line("Reactor " & Integer'Image(id) & " - Everything working normally.");
                   CloseGate;
-               when 1 | 2 =>
-                  Put_Line("Reactor " & Integer'Image(id) & " - Opening gate.");
+               when 1 =>
+                  -- Put_Line("Reactor " & Integer'Image(id) & " - Opening gate.");
                   OpenGate;
---                 when 2 =>
---                    Put_Line("Reactor " & Integer'Image(id) & " - Opening gate.");
---                    OpenGate;
+               when 2 =>
+                  Put_Line("Reactor " & Integer'Image(id) & " - Gate will remain open.");
+                  OpenGate;
                when others =>
                   null;
             end case;
@@ -61,7 +61,7 @@ package body Reactor_Package is
       procedure modifyTemperature(temp:in Integer) is
       begin
          -- DEBUG
-         Put_Line("Temperature " & Integer'Image(id) & " is " & Integer'Image(temperature));
+         -- Put_Line("Temperature " & Integer'Image(id) & " is " & Integer'Image(temperature));
          temperature := temperature + temp;
       end modifyTemperature;
 
